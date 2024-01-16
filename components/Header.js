@@ -101,6 +101,11 @@ class Header extends React.Component {
           <BellButton key='chat-search' navigation={navigation} isWhite={white} />,
           <BasketButton key='basket-search' navigation={navigation} isWhite={white} />
         ]);
+        // case 'WishList':
+        // return ([
+        //   <BellButton key='chat-search' navigation={navigation} isWhite={white} />,
+        //   <BasketButton key='basket-search' navigation={navigation} isWhite={white} />
+        // ]);
       default:
         break;
     }
@@ -197,6 +202,7 @@ class Header extends React.Component {
               
           }
           leftStyle={{ paddingVertical: 12, flex: 0.2 }}
+          
           titleStyle={[
             styles.title,
             { color: argonTheme.COLORS[white ? 'WHITE' : 'HEADER'] },
@@ -219,6 +225,7 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   navbar: {
     paddingVertical: 0,
@@ -244,7 +251,7 @@ const styles = StyleSheet.create({
     right: 12,
   },
   header: {
-    backgroundColor: theme.COLORS.WHITE,
+    backgroundColor: theme.COLORS.WHITE
   },
   divider: {
     borderRightWidth: 0.3,

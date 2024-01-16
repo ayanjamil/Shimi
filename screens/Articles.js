@@ -82,7 +82,8 @@ class Articles extends React.Component {
   renderCards = () => {
     return (
       <Block flex style={styles.group}>
-        <Text bold size={16} style={styles.title}>
+      
+        <Text bold  size={16} style={styles.title}>
           Cards
         </Text>
         <Block flex>

@@ -15,9 +15,11 @@ import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
+import Wishlist from "../screens/WishList";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+import WishList from "../screens/WishList";
 
 const { width } = Dimensions.get("screen");
 
@@ -63,6 +65,45 @@ function ElementsStack(props) {
     </Stack.Navigator>
   );
 }
+function WishListStack(props) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        mode: "card",
+        headerShown: "screen",
+      }}
+    >
+      <Stack.Screen
+        name="WishList"
+        component={WishList}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="WishList" navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" },
+        }}
+      />
+      <Stack.Screen
+        name="Pro"
+        component={Pro}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 
 function ArticlesStack(props) {
   return (
@@ -274,6 +315,13 @@ function AppStack(props) {
           headerShown: false,
         }}
       />
+      <Drawer.Screen
+        name="WishList"
+        component={WishListStack}
+        options={{
+          headerShown: false,
+        }}
+        />
       <Drawer.Screen
         name="Articles"
         component={ArticlesStack}
