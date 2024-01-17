@@ -53,10 +53,10 @@ ArInput.propTypes = {
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: 4,
-    borderColor: argonTheme.COLORS.BORDER,
-    height: 44,
-    backgroundColor: '#FFFFFF'
+    borderRadius: 30,
+    borderColor: "#F1F1F1",
+    height: 48,
+    backgroundColor: "#F1F1F1",
   },
   success: {
     borderColor: argonTheme.COLORS.INPUT_SUCCESS,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOpacity: 0.05,
     elevation: 2,
-  }
+  },
 });
 
 export default ArInput;
