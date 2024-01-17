@@ -14,6 +14,7 @@ import CardWishlist from "../components/CardWishlist";
 const { width } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
+var itemCount;
 class WishList extends React.Component {
   renderProduct = (item) => {
     const { navigation } = this.props;
@@ -28,29 +29,20 @@ class WishList extends React.Component {
   };
 
   renderCards = () => {
-    return (
+    var wishlistCards = [];
+	  for(itemCount = 0; itemCount <= 10; itemCount++){
+      wishlistCards.push(
+        <Block key = {itemCount}>
+          <Block flex>         
+            <CardWishlist item={articles[5]} horizontal />
+          </Block>
+        </Block>
+      )
+      console.log(itemCount)
+	  }    
+    return (      
       <Block flex style={styles.articles}>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>
-        <Block flex>         
-          <CardWishlist item={articles[5]} horizontal />
-        </Block>      
+        { wishlistCards }      
       </Block>
     );
   };
@@ -58,16 +50,15 @@ class WishList extends React.Component {
     return (
       <Block >
         <Block >
-          <Text bold  style={styles.headItems}>10 items</Text>
+          <Text bold style={styles.headItems}>{itemCount}10 Item</Text>
           <ScrollView showsVerticalScrollIndicator={false}>
-          {this.renderCards()}
+            {this.renderCards()}
           </ScrollView>
         </Block>
       </Block>
     );
   }
 }
-
 const styles = StyleSheet.create({
   title: {
     paddingBottom: theme.SIZES.BASE,
