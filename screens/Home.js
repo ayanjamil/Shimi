@@ -1,46 +1,81 @@
-import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Block, theme } from 'galio-framework';
+import React from "react";
+import {
+  StyleSheet,
+  Dimensions,
+  Image,
+  ScrollView,
+  Platform,
+} from "react-native";
+import { Block, Text, theme } from "galio-framework";
 
-import { Card } from '../components';
-import articles from '../constants/articles';
-const { width } = Dimensions.get('screen');
+import { Input } from "../components";
+import MasonryList from "../components/MasonryList";
+import { HeaderHeight } from "../constants/utils";
+import pins from "../constants/pins";
+
+import { FontAwesome } from "@expo/vector-icons";
+
+const { width, height } = Dimensions.get("screen");
+
+const thumbMeasure = (width - 48 - 32) / 3;
+const loading = false;
 
 class Home extends React.Component {
-  renderArticles = () => {
-    return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.articles}>
-        <Block flex>
-          <Card item={articles[0]} horizontal  />
-          <Block flex row>
-            <Card item={articles[1]} style={{ marginRight: theme.SIZES.BASE }} />
-            <Card item={articles[2]} />
-          </Block>
-          <Card item={articles[3]} horizontal />
-          <Card item={articles[4]} full />
-        </Block>
-      </ScrollView>
-    )
-  }
-
   render() {
     return (
-      <Block flex center style={styles.home}>
-        {this.renderArticles()}
+      <Block flex style={styles.homeContainer}>
+        <ScrollView style={{ width, marginTop: "20%" }}>
+          <Block flex style={styles.homeTop}>
+
+            {/* shimi logo */}
+            <Block middle style={{marginTop:40}}>
+              <Image source={require("../assets/imgs/shimi.png")} style={{ marginBottom: 30}} />
+            </Block>
+
+            {/* search bar */}
+            <Block flex >
+              <Input
+                placeholder="Search Shimi"
+                shadowless
+                iconContent={
+                  <FontAwesome name="search" size={16} style={{marginRight: 10}} color="grey" />
+                }
+              />
+            </Block>
+          </Block>
+
+          {/* masonry layout */}
+          <Block flex>
+            <MasonryList
+              pins={pins}
+              refreshing={loading}
+            />
+          </Block>
+        </ScrollView>
       </Block>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  home: {
-    width: width,    
+  homeContainer: {
+    width: width,
+    marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
+    // marginBottom: -HeaderHeight * 2,
+    flex: 1,
   },
-  articles: {
-    width: width - theme.SIZES.BASE * 2,
-    paddingVertical: theme.SIZES.BASE,
+  homeTop: {
+    // position: "relative",
+    padding: theme.SIZES.BASE,
+    // marginHorizontal: theme.SIZES.BASE,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2,
   },
 });
 

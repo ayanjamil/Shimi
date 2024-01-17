@@ -5,10 +5,9 @@ import { argonTheme, tabs } from "../constants";
 
 import Articles from "../screens/Articles";
 import { Block } from "galio-framework";
-// drawer
-import CustomDrawerContent from "./Menu";
-import Elements from "../screens/Elements";
+
 // screens
+import Elements from "../screens/Elements";
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
@@ -16,53 +15,60 @@ import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+
+// for the bottom tab navigation icons
+// need to reduce this in later revisions for optimisation
+import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+
+
+// also need to remove redundant files from galio framework
 
 const { width } = Dimensions.get("screen");
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator();
 
-function ElementsStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Elements"
-        component={Elements}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Elements" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
+// function ElementsStack(props) {
+//   return (
+//     <Stack.Navigator
+//       screenOptions={{
+//         mode: "card",
+//         headerShown: false,
+//       }}
+//     >
+//       <Stack.Screen
+//         name="Elements"
+//         component={Elements}
+//         options={{
+//           header: ({ navigation, scene }) => (
+//             <Header title="Elements" navigation={navigation} scene={scene} />
+//           ),
+//           cardStyle: { backgroundColor: "#F8F9FE" },
+//         }}
+//       />
+//       <Stack.Screen
+//         name="Pro"
+//         component={Pro}
+//         options={{
+//           header: ({ navigation, scene }) => (
+//             <Header
+//               title=""
+//               back
+//               white
+//               transparent
+//               navigation={navigation}
+//               scene={scene}
+//             />
+//           ),
+//           headerTransparent: true,
+//         }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
+
 
 function ArticlesStack(props) {
   return (
@@ -150,9 +156,11 @@ function ProfileStack(props) {
   );
 }
 
+// need to change header options to remove header or remove icon in Header.js
 function HomeStack(props) {
   return (
     <Stack.Navigator
+      initialRouteName="Home"
       screenOptions={{
         mode: "card",
         headerShown: "screen",
@@ -164,14 +172,15 @@ function HomeStack(props) {
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              title="Home"
-              search
-              options
+              transparent
+              white
+              title=""
               navigation={navigation}
               scene={scene}
             />
           ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
+          cardStyle: { backgroundColor: "#FFFFFF" },
+          headerTransparent: true,
         }}
       />
       <Stack.Screen
@@ -215,72 +224,54 @@ export default function OnboardingStack(props) {
   );
 }
 
+// bottom tab navigation
 function AppStack(props) {
   return (
-    <Drawer.Navigator
-      style={{ flex: 1 }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-      drawerStyle={{
-        backgroundColor: "white",
-        width: width * 0.8,
-      }}
-      drawerContentOptions={{
-        activeTintcolor: "white",
-        inactiveTintColor: "#000",
-        activeBackgroundColor: "transparent",
-        itemStyle: {
-          width: width * 0.75,
-          backgroundColor: "transparent",
-          paddingVertical: 16,
-          paddingHorizonal: 12,
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          overflow: "hidden",
-        },
+    <BottomTab.Navigator
+      tabBarOptions={{
+        activeTintColor: "#DD4A65", // Color of the icon and label for the active tab
+        inactiveTintColor: "black", // Color of the icon and label for the inactive tabs
         labelStyle: {
-          fontSize: 18,
-          marginLeft: 12,
-          fontWeight: "normal",
+          fontSize: 16, // Font size of the tab label
+        },
+        style: {
+          backgroundColor: "blue", // Background color of the bottom tab bar
         },
       }}
-      initialRouteName="Home"
     >
-      <Drawer.Screen
+      <BottomTab.Screen
         name="Home"
         component={HomeStack}
         options={{
+          tabBarShowLabel: false,
           headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="home" size={size} color={color} />
+          ),
         }}
       />
-      <Drawer.Screen
+      <BottomTab.Screen
+        name="Wishlist"
+        component={ArticlesStack}
+        options={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="heart" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
         name="Profile"
         component={ProfileStack}
         options={{
+          tabBarShowLabel: false,
           headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
+          ),
         }}
       />
-      <Drawer.Screen
-        name="Account"
-        component={Register}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="Elements"
-        component={ElementsStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="Articles"
-        component={ArticlesStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Drawer.Navigator>
+    </BottomTab.Navigator>
   );
 }
