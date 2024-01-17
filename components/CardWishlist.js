@@ -1,12 +1,9 @@
 import React from 'react';
 import { withNavigation } from '@react-navigation/compat';
 import PropTypes from 'prop-types';
-import { StyleSheet, Dimensions, Image, TouchableWithoutFeedback,Pressable } from 'react-native';
+import { StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import { Block, Button as GaButton,Text, theme } from 'galio-framework';
-
-import { Button, Header, Icon, Input, Select, Switch } from "../components/";
-import {ImageButton} from '../components/ImageButton';
-
+import { Button} from "../components/";
 import { argonTheme } from '../constants';
 
 class Card extends React.Component {
@@ -17,7 +14,7 @@ class Card extends React.Component {
       </Block>
     )
   }
-  renderButtons = () => {
+  renderButton = () => {
     return (
       <Block flex style={styles.group}>
           <Button  style={styles.button}>
@@ -43,26 +40,13 @@ class Card extends React.Component {
       </Block>
     );
   }
-  // renderImageButton=()=>{
-  //   <Block style={styles.container}>
-  //         <ImageButton 
-  //           onPress={() => console.log("Button as component")} 
-  //           imageStyle={styles.image} 
-  //           source={require("../assets/imgs/trash.png")}
-  //           text="Press " 
-  //         />
-  //     </Block>
-  // }
   render() { 
     const { 
       navigation, 
       item, 
       horizontal, 
     } = this.props;
-  
-
     return (
-      
       <Block row={horizontal} card flex style={styles.card}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
           <Block flex >
@@ -74,16 +58,11 @@ class Card extends React.Component {
             <Block flex>
               <Text bold style={styles.cardTitle}>{item.title}</Text>
               {this.renderStoreInfo()}
-              {this.renderButtons()}
-              
-              {/* {this.renderImageButton()} */}
-              
-            </Block> 
-                               
+              {this.renderButton()}
+            </Block>                              
           </Block>
         </TouchableWithoutFeedback>
         {this.renderTrash()} 
- 
       </Block>
     );
   }
@@ -109,9 +88,7 @@ const styles = StyleSheet.create({
     width: theme.SIZES.BASE * 1.58,
     height: theme.SIZES.BASE *1.58,
     marginRight:10,
-   
     borderWidth:0,
-    
   },
   trash:{
    marginTop:118,
@@ -124,12 +101,8 @@ const styles = StyleSheet.create({
     
   },
   group: {
-    
-    
     flexDirection: "row",
-    marginLeft:10,
-  
-    
+    marginLeft:10,  
   },
   group2: {
     
@@ -137,11 +110,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft:8,
     marginBottom:40,
-   
   },
   card: {
-    
-    
     height:170,
     marginVertical: 10,
     marginHorizontal:0,
@@ -149,28 +119,21 @@ const styles = StyleSheet.create({
     borderBottomWidth:1,
     borderRadius:0,
     borderBottomColor:'#DCDCDC',
-
-    
   },
   cardTitle: {
-   
     fontSize:16,
     flex: 1,
     marginTop:0,
     marginLeft:10,
   },
   cardDescription: {
-    
-    
     alignContent:'center',
     padding:3,
     paddingTop:5,
     paddingBottom:15,
-    marginRight:60,
-    
+    marginRight:60,  
   },
   imageStyles:{
-    
     height:140,
     width:135,
     borderRadius:10,

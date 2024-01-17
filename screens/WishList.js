@@ -1,30 +1,22 @@
 //galio
 import { Block, Text, theme } from "galio-framework";
+
 import {
   Dimensions,
-  Image,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
 //argon
-import { Images, argonTheme, articles } from "../constants";
-
-import { Card } from "../components";
+import {  argonTheme, articles } from "../constants";
 import React from "react";
 import CardWishlist from "../components/CardWishlist";
-
 const { width } = Dimensions.get("screen");
-
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
-
-
 class WishList extends React.Component {
-  renderProduct = (item, index) => {
+  renderProduct = (item) => {
     const { navigation } = this.props;
-
     return (
       <TouchableWithoutFeedback
         style={{ zIndex: 3 }}
@@ -62,7 +54,6 @@ class WishList extends React.Component {
       </Block>
     );
   };
-
   render() {
     return (
       <Block >
@@ -88,7 +79,6 @@ const styles = StyleSheet.create({
     paddingTop: theme.SIZES.BASE,
   },
   headItems: {
-    
     width:width,
     height:46,
     color:'#A6A6A6',
@@ -96,7 +86,6 @@ const styles = StyleSheet.create({
     marginTop:10,
     marginLeft:20,
     fontSize:20,
-
   },
   albumThumb: {
     borderRadius: 4,
@@ -130,7 +119,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   productImage: {
-    
     borderRadius: 3,
   },
   productPrice: {
@@ -139,7 +127,6 @@ const styles = StyleSheet.create({
   },
   productDescription: {
     paddingTop: theme.SIZES.BASE,
-    // paddingBottom: theme.SIZES.BASE * 2,
   },
   articles: {
     padding:'2%',
