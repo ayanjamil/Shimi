@@ -15,6 +15,7 @@ const { width } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
 var itemCount;
+
 class WishList extends React.Component {
   renderProduct = (item) => {
     const { navigation } = this.props;
@@ -38,7 +39,7 @@ class WishList extends React.Component {
           </Block>
         </Block>
       )
-      console.log(itemCount)
+      // console.log(itemCount)
 	  }    
     return (      
       <Block flex style={styles.articles}>

@@ -17,7 +17,7 @@ import Register from "../screens/Register";
 import Wishlist from "../screens/WishList";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import WishList from "../screens/WishList";
+
 
 // for the bottom tab navigation icons
 // need to reduce this in later revisions for optimisation
@@ -71,7 +71,6 @@ const BottomTab = createBottomTabNavigator();
 //   );
 // }
 
-<<<<<<< HEAD
 function ElementsStack(props) {
   return (
     <Stack.Navigator
@@ -149,10 +148,8 @@ function WishListStack(props) {
   );
 }
 
-=======
->>>>>>> origin/master
 
-function ArticlesStack(props) {
+function WishlistStack(props) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -161,11 +158,11 @@ function ArticlesStack(props) {
       }}
     >
       <Stack.Screen
-        name="Articles"
-        component={Articles}
+        name="Wishlist"
+        component={Wishlist}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Articles" navigation={navigation} scene={scene} />
+            <Header title="Wishlist" navigation={navigation} scene={scene} />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
@@ -334,7 +331,7 @@ function AppStack(props) {
       />
       <BottomTab.Screen
         name="Wishlist"
-        component={ArticlesStack}
+        component={WishlistStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
@@ -354,38 +351,6 @@ function AppStack(props) {
           ),
         }}
       />
-<<<<<<< HEAD
-      <Drawer.Screen
-        name="Account"
-        component={Register}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="Elements"
-        component={ElementsStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="WishList"
-        component={WishListStack}
-        options={{
-          headerShown: false,
-        }}
-        />
-      <Drawer.Screen
-        name="Articles"
-        component={ArticlesStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Drawer.Navigator>
-=======
     </BottomTab.Navigator>
->>>>>>> origin/master
   );
 }

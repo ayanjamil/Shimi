@@ -3,7 +3,7 @@ import { withNavigation } from '@react-navigation/compat';
 import PropTypes from 'prop-types';
 import { StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import { Block, Button as GaButton,Text, theme } from 'galio-framework';
-import { Button} from "../components/";
+import { Button} from ".";
 import { argonTheme } from '../constants';
 
 class Card extends React.Component {
