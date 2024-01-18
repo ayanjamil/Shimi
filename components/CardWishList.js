@@ -6,7 +6,7 @@ import { Block, Button as GaButton,Text, theme } from 'galio-framework';
 import { Button} from ".";
 import { argonTheme } from '../constants';
 
-class Card extends React.Component {
+class CardWishList extends React.Component {
   renderTrash = ()=>{
     return(
       <Block style={styles.trash} >
@@ -47,16 +47,16 @@ class Card extends React.Component {
       horizontal, 
     } = this.props;
     return (
-      <Block row={horizontal} card flex style={styles.card}>
+      <Block row={horizontal} CardWishList flex style={styles.CardWishList}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
           <Block flex >
             <Image source={require("../assets/imgs/def.png")} style={styles.imageStyles} />      
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
-          <Block flex style={styles.cardDescription}>
+          <Block flex style={styles.CardWishListDescription}>
             <Block flex>
-              <Text bold style={styles.cardTitle}>{item.title}</Text>
+              <Text bold style={styles.CardWishListTitle}>{item.title}</Text>
               {this.renderStoreInfo()}
               {this.renderButton()}
             </Block>                              
@@ -67,13 +67,13 @@ class Card extends React.Component {
     );
   }
 }
-Card.propTypes = {
+CardWishList.propTypes = {
   item: PropTypes.object,
   horizontal: PropTypes.bool,
   full: PropTypes.bool,
   ctaColor: PropTypes.string,
   imageStyle: PropTypes.any,
-}
+}// defining all the prop types this Card Wishlist can accept
 const styles = StyleSheet.create({
   button: {
     backgroundColor:'#DD4A65',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     marginLeft:8,
     marginBottom:40,
   },
-  card: {
+  CardWishList: {
     height:170,
     marginVertical: 10,
     marginHorizontal:0,
@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
     borderRadius:0,
     borderBottomColor:'#DCDCDC',
   },
-  cardTitle: {
+  CardWishListTitle: {
     fontSize:16,
     flex: 1,
     marginTop:0,
     marginLeft:10,
   },
-  cardDescription: {
+  CardWishListDescription: {
     alignContent:'center',
     padding:3,
     paddingTop:5,
@@ -142,4 +142,4 @@ const styles = StyleSheet.create({
   },
   
 });
-export default withNavigation(Card);
+export default withNavigation(CardWishList);

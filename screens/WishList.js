@@ -10,7 +10,7 @@ import {
 //argon
 import {  argonTheme, articles } from "../constants";
 import React from "react";
-import CardWishlist from "../components/CardWishlist";
+import CardWishList from "../components/CardWishList";
 const { width } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
@@ -35,7 +35,7 @@ class WishList extends React.Component {
       wishlistCards.push(
         <Block key = {itemCount}>
           <Block flex>         
-            <CardWishlist item={articles[5]} horizontal />
+            <CardWishList item={articles[5]} horizontal />
           </Block>
         </Block>
       )
