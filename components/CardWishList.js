@@ -7,32 +7,15 @@ import { Button} from ".";
 import { argonTheme } from '../constants';
 
 class CardWishList extends React.Component {
-  renderTrash = ()=>{
-    return(
-      <Block style={styles.trash} >
-        <Image source={require("../assets/imgs/bin.png")} style={styles.logo} />
-      </Block>
-    )
-  }
-  renderButton = () => {
-    return (
-      <Block flex style={styles.group}>
-          <Button  style={styles.button}>
-            View
-          </Button>        
-      </Block>
-    );
-  };
   renderStoreInfo =()=> {
     return (
-      <Block flex style={styles.group2}>        
+      <Block flex style={styles.store}>        
         <Block >
-          <Image source={require("../assets/imgs/hm.png")} style={styles.logo} />
+          <Image source={this.props.image} style={styles.storelogo} />
         </Block>
         <Block >
           <Text size={15}
-            style={{ marginBottom:4,marginRight:20,color:'#A6A6A6',}}
-            color={argonTheme.COLORS.DEFAULT}
+            style={{color:'#A6A6A6',marginHorizontal:'7%',}}
           >
             Mango
           </Text>
@@ -47,23 +30,32 @@ class CardWishList extends React.Component {
       horizontal, 
     } = this.props;
     return (
-      <Block row={horizontal} CardWishList flex style={styles.CardWishList}>
+      <Block style={styles.CardWishList}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
-          <Block flex >
-            <Image source={require("../assets/imgs/def.png")} style={styles.imageStyles} />      
+          <Block style={styles.imageContainer}>
+            <Image source={require("../assets/imgs/def.png")} style={styles.imageStyles} />
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
           <Block flex style={styles.CardWishListDescription}>
-            <Block flex>
-              <Text bold style={styles.CardWishListTitle}>{item.title}</Text>
+              <Block flex style={styles.productName}>
+                <Text bold style={styles.CardWishListTitle}>{item.title}</Text>
+              </Block>
               {this.renderStoreInfo()}
-              {this.renderButton()}
-            </Block>                              
+              <Block flex style={styles.buttons}>
+                <Button flex style={styles.viewBtn} onPress={() => navigation.navigate('Pro')}>
+                  View
+                </Button> 
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
+                  <Block flex >
+                    <Image source={require("../assets/imgs/bin.png")} style={styles.logo} /> 
+                  </Block>
+                </TouchableWithoutFeedback>
+              </Block>                             
           </Block>
         </TouchableWithoutFeedback>
-        {this.renderTrash()} 
       </Block>
+      
     );
   }
 }
@@ -73,73 +65,71 @@ CardWishList.propTypes = {
   full: PropTypes.bool,
   ctaColor: PropTypes.string,
   imageStyle: PropTypes.any,
-}// defining all the prop types this Card Wishlist can accept
+  // gets the source of image which is gettin passed form constants articles
+  imageSource:PropTypes.imageSource,
+}
+// defining all the prop types this Card Wishlist can accept
 const styles = StyleSheet.create({
-  button: {
+  CardWishList: {
+    alignContent:'flex-start',
+    width:'94%',
+    marginHorizontal:'4.5%',
+    height: '90%',
+    flexDirection:'row',
+    marginVertical:'2%',
+  },
+  imageContainer: {
+    marginTop:'2%',
+    height: '90%',
+  },
+  imageStyles:{
+    height:'100%',
+    width:120,
+    borderRadius:10,
+  },
+  CardWishListDescription: {
+    marginLeft:'2%',
+    alignContent:'flex-start',
+    padding:'1%' 
+  },
+  productName:{
+    alignContent:'flex-start',
+    flex:1,
+  },
+  CardWishListTitle: {
+    alignContent:'flex-start',
+    flexDirection: "row",
+    fontSize:16,
+    fontStyle:'bold',
+  },
+  store: {
+    flexDirection: "row",
+    alignItems: 'flex-start',
+    marginVertical:'1%'
+  
+  },
+  storelogo: {
+    width: theme.SIZES.BASE * 1.28,
+    height: theme.SIZES.BASE *1.28,
+    borderRadius:8,
+    alignSelf:'flex-end',
+  },
+  buttons: { 
+    flexDirection: "row",
+    alignItems: "center",  
+    marginTop:'17%',
+  },
+  viewBtn: {
     backgroundColor:'#DD4A65',
     borderRadius:20,
-    width: 75,
-    height:24,
-    padding:2,
-    marginLeft:1,
-    marginVertical:0,
+    width:'35%',
+    height:'80%', 
   },
   logo: {
     width: theme.SIZES.BASE * 1.58,
     height: theme.SIZES.BASE *1.58,
-    marginRight:10,
-    borderWidth:0,
+    borderRadius:8,
+    alignSelf:'flex-end',
   },
-  trash:{
-   marginTop:118,
-  },
-  
-  logotrash: {
-    
-    width: theme.SIZES.BASE * 1.58,
-    height: theme.SIZES.BASE *1.58,
-    
-  },
-  group: {
-    flexDirection: "row",
-    marginLeft:10,  
-  },
-  group2: {
-    
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft:8,
-    marginBottom:40,
-  },
-  CardWishList: {
-    height:170,
-    marginVertical: 10,
-    marginHorizontal:0,
-    borderWidth:0,
-    borderBottomWidth:1,
-    borderRadius:0,
-    borderBottomColor:'#DCDCDC',
-  },
-  CardWishListTitle: {
-    fontSize:16,
-    flex: 1,
-    marginTop:0,
-    marginLeft:10,
-  },
-  CardWishListDescription: {
-    alignContent:'center',
-    padding:3,
-    paddingTop:5,
-    paddingBottom:15,
-    marginRight:60,  
-  },
-  imageStyles:{
-    height:140,
-    width:135,
-    borderRadius:10,
-    marginBottom:5,
-    marginLeft:'7%',
-  },
-  
 });
 export default withNavigation(CardWishList);
