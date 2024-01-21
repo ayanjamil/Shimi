@@ -183,7 +183,7 @@ function HomeStack(props) {
             <Header
               transparent
               white
-              title=""
+              title="home"
               navigation={navigation}
               scene={scene}
             />

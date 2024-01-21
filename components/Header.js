@@ -64,21 +64,10 @@ const SearchButton = ({ isWhite, style, navigation }) => (
 class Header extends React.Component {
   handleLeftPress = () => {
     const { back, navigation } = this.props;
-    return back ? navigation.goBack() : navigation.openDrawer();
+    return back ? navigation.goBack() : navigation.goBack();
   };
   renderRight = () => {
     const { white, title, navigation } = this.props;
-
-    if (title === "Title") {
-      return [
-        <BellButton key="chat-title" navigation={navigation} isWhite={white} />,
-        <BasketButton
-          key="basket-title"
-          navigation={navigation}
-          isWhite={white}
-        />,
-      ];
-    }
 
     switch (title) {
       case "Home":
@@ -303,31 +292,32 @@ class Header extends React.Component {
       styles.navbar,
       bgColor && { backgroundColor: bgColor },
     ];
-
-    return (
-      <Block>
-        <NavBar
-          back={false}
-          title={title}
-          style={navbarStyles}
-          transparent={transparent}
-          right={this.renderRight()}
-          rightStyle={{ alignItems: "center" }}
-          left={
-            <Icon
-              name={back ? "chevron-left" : "menu"}
-              family="entypo"
-              size={30}
-              onPress={this.handleLeftPress}
-              style={{ marginTop: 2, marginHorizontal: 5 }}
-            />
-          }
-          titleStyle={[styles.title, titleColor && { color: titleColor }]}
-          {...props}
-        />
-        {this.renderHeader()}
-      </Block>
-    );
+    if (title != "home") {
+      return (
+        <Block>
+          <NavBar
+            back={false}
+            title={title}
+            style={navbarStyles}
+            transparent={transparent}
+            right={this.renderRight()}
+            rightStyle={{ alignItems: "center" }}
+            left={
+              <Icon
+                name="chevron-left"
+                family="entypo"
+                size={30}
+                onPress={this.handleLeftPress}
+                style={{ marginTop: 2, marginHorizontal: 5 }}
+              />
+            }
+            titleStyle={[styles.title, titleColor && { color: titleColor }]}
+            {...props}
+          />
+          {this.renderHeader()}
+        </Block>
+      );
+    }
   }
 }
 
