@@ -5,6 +5,9 @@ import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 import { Block, Button as GaButton, Text, theme } from "galio-framework";
 import { Button } from ".";
 import { argonTheme } from "../constants";
+import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 class CardWishList extends React.Component {
   renderStoreInfo = () => {
@@ -58,11 +61,19 @@ class CardWishList extends React.Component {
               <TouchableWithoutFeedback
                 onPress={() => navigation.navigate("Pro")}
               >
-                <Block flex>
-                  <Image
+                <Block flex style={styles.trash}>
+                  {/* <Image
                     source={require("../assets/imgs/bin.png")}
                     style={styles.logo}
+                  /> */}
+                  {/* <Entypo name="trash" size={24} color="black" /> */}
+                  <FontAwesome
+                    name="trash"
+                    size={17}
+                    color="black"
+                    style={{ alignSelf: "flex-end", paddingHorizontal: 10 }}
                   />
+                  {/* <Ionicons name="trash" size={20} /> */}
                 </Block>
               </TouchableWithoutFeedback>
             </Block>
@@ -136,12 +147,8 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     alignSelf: "flex-start",
   },
-  logo: {
-    width: theme.SIZES.BASE * 1.58,
-    height: theme.SIZES.BASE * 1.58,
-    borderRadius: 8,
+  trash: {
     alignSelf: "flex-end",
-    marginTop: 10,
   },
 });
 export default withNavigation(CardWishList);

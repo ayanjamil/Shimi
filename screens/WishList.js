@@ -3,7 +3,7 @@ import { Dimensions, ScrollView, StyleSheet } from "react-native";
 import { articles } from "../constants";
 import React from "react";
 import CardWishList from "../components/CardWishList";
-const { width } = Dimensions.get("screen");
+const { width, height } = Dimensions.get("screen");
 class WishList extends React.Component {
   constructor(props) {
     super(props);
@@ -40,9 +40,11 @@ class WishList extends React.Component {
           <Text bold style={styles.headItems}>
             {this.state.itemCount} Items
           </Text>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {this.renderCards()}
-          </ScrollView>
+          <Block style={styles.scrollView}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {this.renderCards()}
+            </ScrollView>
+          </Block>
         </Block>
       </Block>
     );
@@ -66,6 +68,10 @@ const styles = StyleSheet.create({
     borderWidth: 0.2,
     marginLeft: 25,
     marginRight: 8,
+  },
+  scrollView: {
+    height: "95%",
+    //height of screen - navbar height
   },
 });
 

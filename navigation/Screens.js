@@ -18,12 +18,10 @@ import Wishlist from "../screens/WishList";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-
 // for the bottom tab navigation icons
 // need to reduce this in later revisions for optimisation
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-
 
 // also need to remove redundant files from galio framework
 
@@ -71,7 +69,6 @@ const BottomTab = createBottomTabNavigator();
 //   );
 // }
 
-
 function WishlistStack(props) {
   return (
     <Stack.Navigator
@@ -84,8 +81,18 @@ function WishlistStack(props) {
         name="Wishlist"
         component={Wishlist}
         options={{
+          // the top navbar part see Header.js in components
           header: ({ navigation, scene }) => (
-            <Header title="Wishlist" navigation={navigation} scene={scene} />
+            <Header
+              title="Wishlist"
+              bgColor="#F8F9FE"
+              back
+              center
+              navigation={navigation}
+              scene={scene}
+              transparent
+              titleColor="#110F0F"
+            />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
