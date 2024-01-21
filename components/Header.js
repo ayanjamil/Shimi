@@ -335,6 +335,7 @@ const styles = StyleSheet.create({
   navbar: {
     paddingVertical: 0,
     marginVertical: 1,
+    marginTop: 20,
     zIndex: 5,
   },
   headText: {},
