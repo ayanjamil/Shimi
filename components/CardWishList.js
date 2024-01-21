@@ -12,10 +12,11 @@ class CardWishList extends React.Component {
       <Block flex style={styles.store}>
         <Block>
           <Image
-            source={require("../assets/imgs/hm.png")}
+            source={{
+              uri: "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcSrR7Ml_19H_B-zDu_Z_bQZGw0QqQ9U4wrcsyIsLYTUdUbRnR8dQRl2hFbwwMTnrsx4dn8RSieDAX0xgOMr90CKQT2BqGauj6jT9xLf-SQOorNViw",
+            }}
             style={styles.storelogo}
           />
-          {/* <Image source={this.props.image} style={styles.storelogo} /> */}
         </Block>
         <Block>
           <Text size={15} style={{ color: "#A6A6A6", marginHorizontal: "7%" }}>
@@ -35,6 +36,7 @@ class CardWishList extends React.Component {
               source={require("../assets/imgs/def.png")}
               style={styles.imageStyles}
             />
+            {/* <Image source={{ uri: item.image }} style={imageStyles} /> */}
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
@@ -76,10 +78,7 @@ CardWishList.propTypes = {
   full: PropTypes.bool,
   ctaColor: PropTypes.string,
   imageStyle: PropTypes.any,
-  // gets the source of image which is gettin passed form constants articles
-  imageSource: PropTypes.imageSource,
 };
-// defining all the prop types this Card Wishlist can accept
 const styles = StyleSheet.create({
   CardWishList: {
     alignContent: "flex-start",
@@ -130,10 +129,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   viewBtn: {
-    backgroundColor: "#DD4A65",
+    backgroundColor: "#000000",
     borderRadius: 20,
     width: "35%",
-    height: "80%",
+    height: "70%",
     marginLeft: 0,
     alignSelf: "flex-start",
   },

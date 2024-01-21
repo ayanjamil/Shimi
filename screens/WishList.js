@@ -1,19 +1,24 @@
-//galio
-import {Block, Text, theme} from 'galio-framework';
-
-import {Dimensions, ScrollView, StyleSheet} from 'react-native';
-//argon
-import {articles} from '../constants';
-import React from 'react';
-import CardWishList from '../components/CardWishList';
-const {width} = Dimensions.get('screen');
-var itemCount;
+import { Block, Text, theme } from "galio-framework";
+import { Dimensions, ScrollView, StyleSheet } from "react-native";
+import { articles } from "../constants";
+import React from "react";
+import CardWishList from "../components/CardWishList";
+const { width } = Dimensions.get("screen");
 class WishList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemCount: 0,
+    };
+  }
+  componentDidMount() {
+    this.setState({ itemCount: 23 });
+  }
   renderCards = () => {
     var wishlistCards = [];
-    for (itemCount = 0; itemCount <= 10; itemCount++) {
+    for (let i = 0; i < this.state.itemCount; i++) {
       wishlistCards.push(
-        <Block key={itemCount}>
+        <Block key={i}>
           <Block flex>
             <CardWishList item={articles[5]} horizontal />
             <Block flex style={styles.lineStyle}></Block>
@@ -27,12 +32,13 @@ class WishList extends React.Component {
       </Block>
     );
   };
+
   render() {
     return (
       <Block>
         <Block>
           <Text bold style={styles.headItems}>
-            {itemCount}10 Item
+            {this.state.itemCount} Items
           </Text>
           <ScrollView showsVerticalScrollIndicator={false}>
             {this.renderCards()}
@@ -42,12 +48,13 @@ class WishList extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   headItems: {
     width: width,
-    color: '#A6A6A6',
+    color: "#A6A6A6",
     fontSize: 20,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginLeft: 30,
     marginTop: 10,
   },
@@ -55,10 +62,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   lineStyle: {
-    borderColor: '#DCDCDC',
+    borderColor: "#DCDCDC",
     borderWidth: 0.2,
     marginLeft: 25,
     marginRight: 8,
   },
 });
+
 export default WishList;

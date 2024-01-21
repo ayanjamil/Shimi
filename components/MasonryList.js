@@ -3,22 +3,14 @@ import {
   ScrollView,
   useWindowDimensions,
   RefreshControl,
-    View,
+  View,
 } from "react-native";
-
 
 import Pin from "../components/Pin";
 
-
-const MasonryList = ({
-  pins,
-  refreshing = false,
-  onRefresh = () => {},
-}) => {
+const MasonryList = ({ pins, refreshing = false, onRefresh = () => {} }) => {
   const width = useWindowDimensions().width;
-
   const numColumns = Math.ceil(width / 350);
-
   return (
     <ScrollView
       contentContainerStyle={{ width: "100%" }}
