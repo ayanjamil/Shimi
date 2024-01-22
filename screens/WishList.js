@@ -7,15 +7,6 @@ import { log } from "react-native-reanimated";
 import usables from "../constants/usables";
 const { width, height } = Dimensions.get("screen");
 class WishList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      itemCount: 0,
-    };
-  }
-  componentDidMount() {
-    this.setState({ itemCount: 23 });
-  }
   renderCards = () => {
     return (
       <Block flex style={styles.articles}>
