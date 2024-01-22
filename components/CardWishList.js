@@ -4,28 +4,43 @@ import PropTypes from "prop-types";
 import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 import { Block, Button as GaButton, Text, theme } from "galio-framework";
 import { Button } from ".";
-import { argonTheme } from "../constants";
-import { Entypo } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 class CardWishList extends React.Component {
-  renderStoreInfo = () => {
+  renderStoreInfo = (item) => {
     return (
       <Block flex style={styles.store}>
         <Block>
-          <Image
-            source={{
-              uri: "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcSrR7Ml_19H_B-zDu_Z_bQZGw0QqQ9U4wrcsyIsLYTUdUbRnR8dQRl2hFbwwMTnrsx4dn8RSieDAX0xgOMr90CKQT2BqGauj6jT9xLf-SQOorNViw",
-            }}
-            style={styles.storelogo}
-          />
+          <Image source={{ uri: item.storeImage }} style={styles.storelogo} />
         </Block>
         <Block>
           <Text size={15} style={{ color: "#A6A6A6", marginHorizontal: "7%" }}>
-            Mango
+            {item.storeName}
           </Text>
         </Block>
+      </Block>
+    );
+  };
+  renderButtons = (item) => {
+    return (
+      <Block flex style={styles.buttons}>
+        <Button
+          flex
+          style={styles.viewBtn}
+          onPress={() => navigation.navigate("Pro")}
+        >
+          View
+        </Button>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
+          <Block flex style={styles.trash}>
+            <FontAwesome
+              name="trash"
+              size={17}
+              color="black"
+              style={{ alignSelf: "flex-end", paddingHorizontal: 10 }}
+            />
+          </Block>
+        </TouchableWithoutFeedback>
       </Block>
     );
   };
@@ -35,11 +50,7 @@ class CardWishList extends React.Component {
       <Block style={styles.CardWishList}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
           <Block style={styles.imageContainer}>
-            <Image
-              source={require("../assets/imgs/def.png")}
-              style={styles.imageStyles}
-            />
-            {/* <Image source={{ uri: item.image }} style={imageStyles} /> */}
+            <Image source={{ uri: item.image }} style={styles.imageStyles} />
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
@@ -49,34 +60,8 @@ class CardWishList extends React.Component {
                 {item.title}
               </Text>
             </Block>
-            {this.renderStoreInfo()}
-            <Block flex style={styles.buttons}>
-              <Button
-                flex
-                style={styles.viewBtn}
-                onPress={() => navigation.navigate("Pro")}
-              >
-                View
-              </Button>
-              <TouchableWithoutFeedback
-                onPress={() => navigation.navigate("Pro")}
-              >
-                <Block flex style={styles.trash}>
-                  {/* <Image
-                    source={require("../assets/imgs/bin.png")}
-                    style={styles.logo}
-                  /> */}
-                  {/* <Entypo name="trash" size={24} color="black" /> */}
-                  <FontAwesome
-                    name="trash"
-                    size={17}
-                    color="black"
-                    style={{ alignSelf: "flex-end", paddingHorizontal: 10 }}
-                  />
-                  {/* <Ionicons name="trash" size={20} /> */}
-                </Block>
-              </TouchableWithoutFeedback>
-            </Block>
+            {this.renderStoreInfo(item)}
+            {this.renderButtons(item)}
           </Block>
         </TouchableWithoutFeedback>
       </Block>

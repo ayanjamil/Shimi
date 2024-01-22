@@ -3,6 +3,8 @@ import { Dimensions, ScrollView, StyleSheet } from "react-native";
 import { articles } from "../constants";
 import React from "react";
 import CardWishList from "../components/CardWishList";
+import { log } from "react-native-reanimated";
+import usables from "../constants/usables";
 const { width, height } = Dimensions.get("screen");
 class WishList extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class WishList extends React.Component {
       wishlistCards.push(
         <Block key={i}>
           <Block flex>
-            <CardWishList item={articles[5]} horizontal />
+            <CardWishList item={usables[8]} horizontal />
             <Block flex style={styles.lineStyle}></Block>
           </Block>
         </Block>
