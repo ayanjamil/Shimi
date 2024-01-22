@@ -14,7 +14,7 @@ class CardWishList extends React.Component {
           <Image source={{ uri: item.storeImage }} style={styles.storelogo} />
         </Block>
         <Block>
-          <Text size={15} style={{ color: "#A6A6A6", marginHorizontal: "7%" }}>
+          <Text size={15} style={{ color: "#A6A6A6", marginHorizontal: 5 }}>
             {item.storeName}
           </Text>
         </Block>
@@ -31,6 +31,7 @@ class CardWishList extends React.Component {
         >
           View
         </Button>
+
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
           <Block flex style={styles.trash}>
             <FontAwesome
@@ -54,12 +55,10 @@ class CardWishList extends React.Component {
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
-          <Block flex style={styles.CardWishListDescription}>
-            <Block flex style={styles.productName}>
-              <Text bold style={styles.CardWishListTitle}>
-                {item.title}
-              </Text>
-            </Block>
+          <Block flex style={styles.productName}>
+            <Text bold style={styles.CardWishListTitle}>
+              {item.title}
+            </Text>
             {this.renderStoreInfo(item)}
             {this.renderButtons(item)}
           </Block>
@@ -80,38 +79,37 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     width: "94%",
     marginHorizontal: 20,
-    height: "90%",
+    height: 150,
     flexDirection: "row",
     marginVertical: 10,
   },
   imageContainer: {
     marginTop: 5,
     height: "95%",
+    padding: 1,
   },
   imageStyles: {
     height: "100%",
     width: 100,
     borderRadius: 10,
   },
-  CardWishListDescription: {
-    marginLeft: 10,
-    alignContent: "flex-start",
-    padding: "1%",
-  },
   productName: {
-    alignContent: "flex-start",
-    flex: 1,
+    marginLeft: 10,
+    padding: 5,
   },
   CardWishListTitle: {
+    marginRight: 15,
     alignContent: "flex-start",
     flexDirection: "row",
     fontSize: 16,
     fontStyle: "bold",
+    flexWrap: "wrap",
   },
   store: {
+    flex: 0.5,
     flexDirection: "row",
     alignItems: "flex-start",
-    marginVertical: 2,
+    marginVertical: 6,
   },
   storelogo: {
     width: theme.SIZES.BASE * 1.28,
@@ -120,20 +118,19 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   buttons: {
+    flex: 0.5,
     flexDirection: "row",
-    alignItems: "flex-start",
-    marginTop: 10,
   },
+
   viewBtn: {
     backgroundColor: "#000000",
     borderRadius: 20,
-    width: "35%",
-    height: "70%",
-    marginLeft: 0,
-    alignSelf: "flex-start",
+    width: 100,
+    height: 35,
   },
   trash: {
     alignSelf: "flex-end",
+    padding: 2,
   },
 });
 export default withNavigation(CardWishList);

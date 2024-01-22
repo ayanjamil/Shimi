@@ -17,20 +17,16 @@ class WishList extends React.Component {
     this.setState({ itemCount: 23 });
   }
   renderCards = () => {
-    var wishlistCards = [];
-    for (let i = 0; i < this.state.itemCount; i++) {
-      wishlistCards.push(
-        <Block key={i}>
-          <Block flex>
-            <CardWishList item={usables[8]} horizontal />
-            <Block flex style={styles.lineStyle}></Block>
-          </Block>
-        </Block>
-      );
-    }
     return (
       <Block flex style={styles.articles}>
-        {wishlistCards}
+        {usables.map((item, index) => (
+          <Block key={index}>
+            <Block flex>
+              <CardWishList item={item} horizontal />
+              <Block flex style={styles.lineStyle}></Block>
+            </Block>
+          </Block>
+        ))}
       </Block>
     );
   };
@@ -40,7 +36,7 @@ class WishList extends React.Component {
       <Block>
         <Block>
           <Text bold style={styles.headItems}>
-            {this.state.itemCount} Items
+            {usables.length} Items
           </Text>
           <Block style={styles.scrollView}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -73,7 +69,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     height: "95%",
-    //height of screen - navbar height
   },
 });
 

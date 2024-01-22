@@ -273,8 +273,10 @@ class Header extends React.Component {
       transparent,
       bgColor,
       iconColor,
+      visible,
       titleColor,
       navigation,
+
       ...props
     } = this.props;
 
@@ -292,32 +294,31 @@ class Header extends React.Component {
       styles.navbar,
       bgColor && { backgroundColor: bgColor },
     ];
-    if (title != "home") {
-      return (
-        <Block>
-          <NavBar
-            back={false}
-            title={title}
-            style={navbarStyles}
-            transparent={transparent}
-            right={this.renderRight()}
-            rightStyle={{ alignItems: "center" }}
-            left={
-              <Icon
-                name="chevron-left"
-                family="entypo"
-                size={30}
-                onPress={this.handleLeftPress}
-                style={{ marginTop: 2, marginHorizontal: 5 }}
-              />
-            }
-            titleStyle={[styles.title, titleColor && { color: titleColor }]}
-            {...props}
-          />
-          {this.renderHeader()}
-        </Block>
-      );
-    }
+
+    return (
+      <Block>
+        <NavBar
+          back={false}
+          title={title}
+          style={navbarStyles}
+          transparent={transparent}
+          right={this.renderRight()}
+          rightStyle={{ alignItems: "center" }}
+          left={
+            <Icon
+              name="chevron-left"
+              family="entypo"
+              size={30}
+              onPress={this.handleLeftPress}
+              style={{ marginTop: 2, marginHorizontal: 5 }}
+            />
+          }
+          titleStyle={[styles.title, titleColor && { color: titleColor }]}
+          {...props}
+        />
+        {this.renderHeader()}
+      </Block>
+    );
   }
 }
 
