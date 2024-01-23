@@ -14,6 +14,8 @@ import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
+import ExploreScreen from "../screens/ExploreScreen";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -21,6 +23,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // need to reduce this in later revisions for optimisation
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import SearchScreen from "../screens/SearchScreen";
 
 
 // also need to remove redundant files from galio framework
@@ -80,10 +83,10 @@ function ArticlesStack(props) {
     >
       <Stack.Screen
         name="Articles"
-        component={Articles}
+        component={SearchScreen}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Articles" navigation={navigation} scene={scene} />
+            <Header title="" transparent white navigation={navigation} scene={scene} />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
@@ -180,6 +183,23 @@ function HomeStack(props) {
             />
           ),
           cardStyle: { backgroundColor: "#FFFFFF" },
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Explore"
+        component={ExploreScreen}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
           headerTransparent: true,
         }}
       />

@@ -1,23 +1,18 @@
+// explore list, masonry list but uses explore list pins, also width is reduced to make it 3 columns
+
 import {
   StyleSheet,
   ScrollView,
   useWindowDimensions,
   RefreshControl,
-    View,
+  View,
 } from "react-native";
 
+import ExplistPin from "../components/ExplistPin";
 
-import Pin from "../components/Pin";
-
-
-const MasonryList = ({
-  pins,
-  refreshing = false,
-  onRefresh = () => {},
-}) => {
+const ExploreList = ({ pins, refreshing = false, onRefresh = () => {} }) => {
   const width = useWindowDimensions().width;
-
-  const numColumns = Math.ceil(width / 350);
+  const numColumns = Math.ceil(width / 150);
 
   return (
     <ScrollView
@@ -31,8 +26,8 @@ const MasonryList = ({
           <View style={styles.column} key={`column_${colIndex}`}>
             {pins
               .filter((_, index) => index % numColumns === colIndex)
-              .map((pin) => (
-                <Pin pin={pin} key={pin.id} />
+                    .map((pin) => (
+                    <ExplistPin pin={pin} key={pin.id} />
               ))}
           </View>
         ))}
@@ -43,7 +38,7 @@ const MasonryList = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
+    padding: 10,
     flexDirection: "row",
   },
   column: {
@@ -51,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MasonryList;
+export default ExploreList;
