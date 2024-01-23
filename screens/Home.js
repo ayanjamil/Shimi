@@ -11,7 +11,8 @@ import { Block, Text, theme } from "galio-framework";
 import { Input } from "../components";
 import MasonryList from "../components/MasonryList";
 import { HeaderHeight } from "../constants/utils";
-import pins from "../constants/pins";
+// import pins from "../constants/pins";
+import usables from "../constants/usables";
 
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -26,19 +27,26 @@ class Home extends React.Component {
       <Block flex style={styles.homeContainer}>
         <ScrollView style={{ width, marginTop: "20%" }}>
           <Block flex style={styles.homeTop}>
-
             {/* shimi logo */}
-            <Block middle style={{marginTop:40}}>
-              <Image source={require("../assets/imgs/shimi.png")} style={{ marginBottom: 30}} />
+            <Block middle style={{ marginTop: 40 }}>
+              <Image
+                source={require("../assets/imgs/shimi.png")}
+                style={{ marginBottom: 30 }}
+              />
             </Block>
 
             {/* search bar */}
-            <Block flex >
+            <Block flex>
               <Input
                 placeholder="Search Shimi"
                 shadowless
                 iconContent={
-                  <FontAwesome name="search" size={16} style={{marginRight: 10}} color="grey" />
+                  <FontAwesome
+                    name="search"
+                    size={16}
+                    style={{ marginRight: 10 }}
+                    color="grey"
+                  />
                 }
               />
             </Block>
@@ -46,10 +54,7 @@ class Home extends React.Component {
 
           {/* masonry layout */}
           <Block flex>
-            <MasonryList
-              pins={pins}
-              refreshing={loading}
-            />
+            <MasonryList pins={usables} refreshing={loading} />
           </Block>
         </ScrollView>
       </Block>

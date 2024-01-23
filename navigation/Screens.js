@@ -14,8 +14,7 @@ import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
-import ExploreScreen from "../screens/ExploreScreen";
-
+import Wishlist from "../screens/WishList";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -23,8 +22,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 // need to reduce this in later revisions for optimisation
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import SearchScreen from "../screens/SearchScreen";
-
 
 // also need to remove redundant files from galio framework
 
@@ -72,8 +69,7 @@ const BottomTab = createBottomTabNavigator();
 //   );
 // }
 
-
-function ArticlesStack(props) {
+function WishlistStack(props) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -82,11 +78,21 @@ function ArticlesStack(props) {
       }}
     >
       <Stack.Screen
-        name="Articles"
-        component={SearchScreen}
+        name="Wishlist"
+        component={Wishlist}
         options={{
+          // the top navbar part see Header.js in components
           header: ({ navigation, scene }) => (
-            <Header title="" transparent white navigation={navigation} scene={scene} />
+            <Header
+              title="Wishlist"
+              bgColor="#F8F9FE"
+              back
+              center
+              navigation={navigation}
+              scene={scene}
+              transparent
+              titleColor="#110F0F"
+            />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
@@ -272,7 +278,7 @@ function AppStack(props) {
       />
       <BottomTab.Screen
         name="Wishlist"
-        component={ArticlesStack}
+        component={WishlistStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
