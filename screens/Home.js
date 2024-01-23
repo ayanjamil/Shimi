@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   Platform,
+  Pressable,
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
@@ -22,6 +23,10 @@ const thumbMeasure = (width - 48 - 32) / 3;
 const loading = false;
 
 class Home extends React.Component {
+  goToSearch = () => {
+    this.props.navigation.navigate("Search");
+  }
+
   render() {
     return (
       <Block flex style={styles.homeContainer}>
@@ -56,6 +61,11 @@ class Home extends React.Component {
           <Block flex>
             <MasonryList pins={usables} refreshing={loading} />
           </Block>
+          <Pressable onPress={ 
+            this.goToSearch
+           } style={styles.camBtn}>
+            <FontAwesome name="camera" size={24} color="grey" />
+          </Pressable>
         </ScrollView>
       </Block>
     );
@@ -82,6 +92,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     zIndex: 2,
   },
+  camBtn: {
+    position: "absolute",
+    right: 20,
+    top: 20,
+  }
 });
 
 export default Home;
