@@ -6,9 +6,9 @@ import {
   View,
 } from "react-native";
 
-import Pin from "../components/Pin";
+import Product from "./Product";
 
-const MasonryList = ({ pins, refreshing = false, onRefresh = () => {} }) => {
+const MasonryList = ({ products, refreshing = false, onRefresh = () => {} }) => {
   const width = useWindowDimensions().width;
   const numColumns = Math.ceil(width / 350);
   return (
@@ -21,10 +21,10 @@ const MasonryList = ({ pins, refreshing = false, onRefresh = () => {} }) => {
       <View style={styles.container}>
         {Array.from(Array(numColumns)).map((_, colIndex) => (
           <View style={styles.column} key={`column_${colIndex}`}>
-            {pins
+            {products
               .filter((_, index) => index % numColumns === colIndex)
-              .map((pin) => (
-                <Pin pin={pin} key={pin.id} />
+              .map((product) => (
+                <Product product={product} key={product.id} />
               ))}
           </View>
         ))}

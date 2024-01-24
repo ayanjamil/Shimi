@@ -15,7 +15,7 @@ import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
 import Wishlist from "../screens/WishList";
-import ExploreScreen from "../screens/ExploreScreen";
+import ProductScreen from "../screens/ProductScreen";
 import SearchScreen from "../screens/SearchScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -157,8 +157,8 @@ function HomeStack(props) {
         }}
       />
       <Stack.Screen
-        name="Explore"
-        component={ExploreScreen}
+        name="ProductScreen"
+        component={ProductScreen}
         options={{
           header: ({ navigation, scene }) => (
             <Header
@@ -247,7 +247,7 @@ function AppStack(props) {
       }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeStack}
         options={{
           tabBarShowLabel: false,

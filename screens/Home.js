@@ -12,7 +12,6 @@ import { Block, Text, theme } from "galio-framework";
 import { Input } from "../components";
 import MasonryList from "../components/MasonryList";
 import { HeaderHeight } from "../constants/utils";
-// import pins from "../constants/pins";
 import usables from "../constants/usables";
 
 import { FontAwesome } from "@expo/vector-icons";
@@ -59,13 +58,13 @@ class Home extends React.Component {
 
           {/* masonry layout */}
           <Block flex>
-            <MasonryList pins={usables} refreshing={loading} />
+            <MasonryList products={usables} refreshing={loading} />
           </Block>
-          <Pressable onPress={ 
+          {/* <Pressable onPress={ 
             this.goToSearch
            } style={styles.camBtn}>
             <FontAwesome name="camera" size={24} color="grey" />
-          </Pressable>
+          </Pressable> */}
         </ScrollView>
       </Block>
     );

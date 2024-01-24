@@ -1,4 +1,4 @@
-// this component is for the pins in the explore page
+// this component is for the products in the explore page
 // key difference is that here no icons are used, and title and brand icons are displayed
 
 import { View, Image, Text, StyleSheet, Pressable } from "react-native";
@@ -7,8 +7,8 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 
-const ExplistPin = (props) => {
-  const { id, image, title } = props.pin;
+const ProductRecomCard = (props) => {
+  const { id, image, title, storeName, storeImage } = props.product;
 
   const navigation = useNavigation();
   const [ratio, setRatio] = useState(1);
@@ -19,27 +19,36 @@ const ExplistPin = (props) => {
     }
   }, [image]);
 
-  const goToPinPage = () => {
-    navigation.navigate("Explore", { id });
+  const goToProductPage = () => {
+    navigation.navigate("ProductScreen", { id });
   };
 
   return (
-    <Pressable onPress={goToPinPage} style={styles.pin}>
+    <Pressable onPress={goToProductPage} style={styles.product}>
       <View>
         <Image
           source={{
             uri: image,
           }}
           style={[styles.image, { aspectRatio: ratio }]}
-              />
-        <View style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
-            <Image source={require("../assets/imgs/shimi.png")} style={styles.icon} />
-            <Text style={styles.subtitle} numberOfLines={2}>
-               Brand name
-            </Text>
+        />
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            source={{ uri: storeImage }}
+            style={styles.icon}
+          />
+          <Text style={styles.subtitle} numberOfLines={2}>
+            { storeName }
+          </Text>
         </View>
         <Text style={styles.title} numberOfLines={2}>
-            {title}
+          {title}
         </Text>
       </View>
     </Pressable>
@@ -47,7 +56,7 @@ const ExplistPin = (props) => {
 };
 
 const styles = StyleSheet.create({
-  pin: {
+  product: {
     width: "100%",
     padding: 4,
   },
@@ -96,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExplistPin;
+export default ProductRecomCard;

@@ -3,8 +3,8 @@ import { Ionicons, Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 
-const ExplorePin = (props) => {
-  const { id, image, title } = props.pin;
+const ProductCard = (props) => {
+  const { id, image, title } = props.product;
 
   const navigation = useNavigation();
   const [ratio, setRatio] = useState(1);
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExplorePin;
+export default ProductCard;

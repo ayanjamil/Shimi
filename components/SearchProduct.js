@@ -2,8 +2,8 @@ import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 
-const SearchPin = (props) => {
-  const { id, image, title } = props.pin;
+const SearchProduct = (props) => {
+  const { id, image, title } = props.product;
   const [ratio, setRatio] = useState(1);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const SearchPin = (props) => {
   }, [image]);
 
   const onLike = () => {
-    console.log("Liked a pin");
+    console.log("Liked a product");
   };
 
   return (
@@ -33,7 +33,7 @@ const SearchPin = (props) => {
 };
 
 const styles = StyleSheet.create({
-  pin: {
+  product: {
     width: "100%",
     padding: 4,
   },
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchPin;
+export default SearchProduct;

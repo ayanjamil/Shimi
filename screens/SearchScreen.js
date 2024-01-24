@@ -1,6 +1,5 @@
 // screen for search page results
-// need to implement this in screens.js, take care of pin routing
-
+// need to implement this in screens.js, take care of product routing
 
 import { useEffect, useState } from "react";
 import {
@@ -17,9 +16,9 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import pins from "../constants/pins";
-import SearchPin from "../components/SearchPin";
-import ExploreList from "../components/ExploreList";
+import usables from "../constants/usables";
+import ProductRecomList from "../components/ProductRecomList";
+import SearchProduct from "../components/SearchProduct";
 
 const SearchScreen = () => {
   
@@ -42,14 +41,14 @@ const SearchScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.root}>
       <View style={{ paddingHorizontal: 60, paddingVertical: 20 }}>
-        <SearchPin pin={pins[0]} />
+        <SearchProduct product={usables[0]} />
       </View>
 
       <View style={styles.exploreMore}>
         <Text style={styles.title} numberOfLines={2}>
           Search results
         </Text>
-        <ExploreList pins={pins} />
+        <ProductRecomList products={usables} />
       </View>
 
       <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>

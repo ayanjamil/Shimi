@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     flexDirection: "row",
     fontSize: 16,
-    fontStyle: "bold",
+    fontWeight: "bold",
     flexWrap: "wrap",
   },
   store: {

@@ -7,26 +7,24 @@ import { ScrollView, View, Text, StyleSheet, Image, Pressable } from "react-nati
 
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import pins from "../constants/pins";
-import ExplorePin from "../components/ExplorePin";
+import usables from "../constants/usables";
+import ProductCard from "../components/ProductCard";
+import ProductRecomList from "../components/ProductRecomList";
 
-import { Entypo } from "@expo/vector-icons";
-import ExploreList from "../components/ExploreList";
-
-const ExploreScreen = () => {
-  const [pin, setPin] = useState(null);
+const ProductScreen = () => {
+  const [product, setProduct] = useState(null);
   const [image, setImage] = useState(null);
   const [ratio, setRatio] = useState(1);
 
   const navigation = useNavigation();
   const route = useRoute();
 
-  const pinId = route.params?.id;
+  const productId = route.params?.id;
 
-  const fetchPin = (pinId) => {
-    const pin = pins.find((pin) => pin.id === pinId);
-    setPin(pin);
-    setImage(pin.image);
+  const fetchProduct = (productId) => {
+    const fetchedProduct = usables.find((product) => product.id === productId);
+    setProduct(fetchedProduct);
+    setImage(fetchedProduct.image);
   };
  
   useEffect(() => {
@@ -36,21 +34,21 @@ const ExploreScreen = () => {
   }, [image]);
  
   useEffect(() => {
-    fetchPin(pinId);
-  }, [pinId]);
+    fetchProduct(productId);
+  }, [productId]);
 
   const goBack = () => {
     navigation.goBack();
   };
 
-  if (!pin) {
-    return <Text>Pin not found</Text>;
+  if (!product) {
+    return <Text>Product not found</Text>;
   }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.root}>
       <View style={{ paddingHorizontal: 60, paddingVertical: 20 }}>
-        <ExplorePin pin={pin} />
+        <ProductCard product={product} />
       </View>
 
       <View style={styles.exploreMore}>
@@ -63,13 +61,13 @@ const ExploreScreen = () => {
             }}
           >
             <Image
-              source={require("../assets/imgs/shimi.png")}
+              source={{ uri: product.storeImage }}
               style={{ width: 40, height: 40, borderRadius: 50 }}
             />
-            <Text style={styles.title}>Brand Name</Text>
+            <Text style={styles.title}>{ product.storeName }</Text>
           </View>
           <Pressable
-            onPress={() => console.log("Follow button pressed")}
+            onPress={() => console.log("Shop button pressed")}
             style={styles.shopBtn}
           >
             <Text style={{ color: "white", fontWeight: "600", fontSize: 18 }}>
@@ -77,8 +75,8 @@ const ExploreScreen = () => {
             </Text>
           </Pressable>
         </View>
-        <Text style={styles.title} numberOfLines={2}>{ !!pin && pin.title }</Text>
-        <ExploreList pins={pins} />
+        <Text style={styles.title} numberOfLines={2}>{ !!product && product.title }</Text>
+        <ProductRecomList products={usables} />
       </View>
 
       <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>
@@ -134,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExploreScreen;
+export default ProductScreen;

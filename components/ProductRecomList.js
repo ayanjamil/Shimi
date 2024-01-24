@@ -1,4 +1,4 @@
-// explore list, masonry list but uses explore list pins, also width is reduced to make it 3 columns
+// explore list, masonry list but uses explore list usables, also width is reduced to make it 3 columns
 
 import {
   StyleSheet,
@@ -8,9 +8,13 @@ import {
   View,
 } from "react-native";
 
-import ExplistPin from "../components/ExplistPin";
+import ProductRecomCard from "./ProductRecomCard";
 
-const ExploreList = ({ pins, refreshing = false, onRefresh = () => {} }) => {
+const ProductRecomList = ({
+  products,
+  refreshing = false,
+  onRefresh = () => {},
+}) => {
   const width = useWindowDimensions().width;
   const numColumns = Math.ceil(width / 150);
 
@@ -24,10 +28,10 @@ const ExploreList = ({ pins, refreshing = false, onRefresh = () => {} }) => {
       <View style={styles.container}>
         {Array.from(Array(numColumns)).map((_, colIndex) => (
           <View style={styles.column} key={`column_${colIndex}`}>
-            {pins
+            {products
               .filter((_, index) => index % numColumns === colIndex)
-                    .map((pin) => (
-                    <ExplistPin pin={pin} key={pin.id} />
+              .map((product) => (
+                <ProductRecomCard product={product} key={product.id} />
               ))}
           </View>
         ))}
@@ -46,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExploreList;
+export default ProductRecomList;

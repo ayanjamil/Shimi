@@ -4,9 +4,8 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 
-const Pin = (props) => {
-  const { id, image, title } = props.pin;
-
+const Product = (props) => {
+  const { id, image, title } = props.product;
   const navigation = useNavigation();
   const [ratio, setRatio] = useState(1);
   
@@ -16,18 +15,18 @@ const Pin = (props) => {
     }
   }, [image]);
   
-  const goToPinPage = () => {
-    navigation.navigate("Explore", { id });
+  const goToProductPage = () => {
+    navigation.navigate("ProductScreen", { id });
   };
 
-  const onLike = () => { console.log("Liked a pin") };
+  const onLike = () => { console.log("Liked a product") };
   
   const onCopy = () => {
     console.log("Copy button pressed")
    };
 
   return (
-    <Pressable onPress={goToPinPage} style={styles.pin}>
+    <Pressable onPress={goToProductPage} style={styles.product}>
       <View>
         <Image
           source={{
@@ -47,7 +46,7 @@ const Pin = (props) => {
 };
 
 const styles = StyleSheet.create({
-  pin: {
+  product: {
     width: "100%",
     padding: 6,
   },
@@ -80,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Pin;
+export default Product;
