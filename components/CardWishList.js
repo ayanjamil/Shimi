@@ -1,13 +1,15 @@
 import React from "react";
-import { withNavigation } from "@react-navigation/compat";
 import PropTypes from "prop-types";
 import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 import { Block, Button as GaButton, Text, theme } from "galio-framework";
 import { Button } from ".";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-class CardWishList extends React.Component {
-  renderStoreInfo = (item) => {
+const CardWishList = (props) =>{
+  const { item, horizontal } = props;
+  const navigation=useNavigation(); 
+  const renderStoreInfo = (item) => {
     return (
       <Block flex style={styles.store}>
         <Block>
@@ -21,7 +23,7 @@ class CardWishList extends React.Component {
       </Block>
     );
   };
-  renderButtons = (item) => {
+  const renderButtons = (item) => {
     return (
       <Block flex style={styles.buttons}>
         <Button
@@ -45,28 +47,28 @@ class CardWishList extends React.Component {
       </Block>
     );
   };
-  render() {
-    const { navigation, item, horizontal } = this.props;
-    return (
-      <Block style={styles.CardWishList}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
-          <Block style={styles.imageContainer}>
-            <Image source={{ uri: item.image }} style={styles.imageStyles} />
-          </Block>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
-          <Block flex style={styles.productName}>
-            <Text bold style={styles.CardWishListTitle}>
-              {item.title}
-            </Text>
-            {this.renderStoreInfo(item)}
-            {this.renderButtons(item)}
-          </Block>
-        </TouchableWithoutFeedback>
-      </Block>
-    );
-  }
+
+  return (
+    <Block style={styles.CardWishList}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
+        <Block style={styles.imageContainer}>
+          <Image source={{ uri: item.image }} style={styles.imageStyles} />
+        </Block>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
+        <Block flex style={styles.productName}>
+          <Text bold style={styles.CardWishListTitle}>
+            {item.title}
+          </Text>
+          {renderStoreInfo(item)}
+          {renderButtons(item)}
+        </Block>
+      </TouchableWithoutFeedback>
+    </Block>
+  );
+
 }
+
 CardWishList.propTypes = {
   item: PropTypes.object,
   horizontal: PropTypes.bool,
@@ -133,4 +135,4 @@ const styles = StyleSheet.create({
     padding: 2,
   },
 });
-export default withNavigation(CardWishList);
+export default CardWishList;

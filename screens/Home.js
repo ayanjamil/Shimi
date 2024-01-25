@@ -21,54 +21,52 @@ const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const loading = false;
 
-class Home extends React.Component {
-  goToSearch = () => {
+const Home = (props) => {
+  const goToSearch = () => {
     this.props.navigation.navigate("Search");
   }
 
-  render() {
-    return (
-      <Block flex style={styles.homeContainer}>
-        <ScrollView style={{ width, marginTop: "20%" }}>
-          <Block flex style={styles.homeTop}>
-            {/* shimi logo */}
-            <Block middle style={{ marginTop: 40 }}>
-              <Image
-                source={require("../assets/imgs/shimi.png")}
-                style={{ marginBottom: 30 }}
-              />
-            </Block>
-
-            {/* search bar */}
-            <Block flex>
-              <Input
-                placeholder="Search Shimi"
-                shadowless
-                iconContent={
-                  <FontAwesome
-                    name="search"
-                    size={16}
-                    style={{ marginRight: 10 }}
-                    color="grey"
-                  />
-                }
-              />
-            </Block>
+  return (
+    <Block flex style={styles.homeContainer}>
+      <ScrollView style={{ width, marginTop: "20%" }}>
+        <Block flex style={styles.homeTop}>
+          {/* shimi logo */}
+          <Block middle style={{ marginTop: 40 }}>
+            <Image
+              source={require("../assets/imgs/shimi.png")}
+              style={{ marginBottom: 30 }}
+            />
           </Block>
 
-          {/* masonry layout */}
+          {/* search bar */}
           <Block flex>
-            <MasonryList products={usables} refreshing={loading} />
+            <Input
+              placeholder="Search Shimi"
+              shadowless
+              iconContent={
+                <FontAwesome
+                  name="search"
+                  size={16}
+                  style={{ marginRight: 10 }}
+                  color="grey"
+                />
+              }
+            />
           </Block>
-          {/* <Pressable onPress={ 
-            this.goToSearch
-           } style={styles.camBtn}>
-            <FontAwesome name="camera" size={24} color="grey" />
-          </Pressable> */}
-        </ScrollView>
-      </Block>
-    );
-  }
+        </Block>
+
+        {/* masonry layout */}
+        <Block flex>
+          <MasonryList products={usables} refreshing={loading} />
+        </Block>
+        {/* <Pressable onPress={ 
+          goToSearch
+          } style={styles.camBtn}>
+          <FontAwesome name="camera" size={24} color="grey" />
+        </Pressable> */}
+      </ScrollView>
+    </Block>
+  );
 }
 
 const styles = StyleSheet.create({

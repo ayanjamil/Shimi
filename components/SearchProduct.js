@@ -1,16 +1,9 @@
 import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState, useEffect } from "react";
+import AspectImage from "./AspectImage";
 
 const SearchProduct = (props) => {
   const { id, image, title } = props.product;
-  const [ratio, setRatio] = useState(1);
-
-  useEffect(() => {
-    if (image) {
-      Image.getSize(image, (width, height) => setRatio(width / height));
-    }
-  }, [image]);
 
   const onLike = () => {
     console.log("Liked a product");
@@ -18,12 +11,7 @@ const SearchProduct = (props) => {
 
   return (
     <View>
-      <Image
-        source={{
-          uri: image,
-        }}
-        style={[styles.image, { aspectRatio: ratio }]}
-      />
+      <AspectImage image={image} />
 
       <Pressable onPress={onLike} style={styles.lensBtn}>
         <MaterialCommunityIcons name="google-lens" size={24} color="white" />

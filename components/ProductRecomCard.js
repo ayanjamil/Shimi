@@ -5,19 +5,12 @@ import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
+import AspectImage from "./AspectImage";
 
 const ProductRecomCard = (props) => {
   const { id, image, title, storeName, storeImage } = props.product;
 
   const navigation = useNavigation();
-  const [ratio, setRatio] = useState(1);
-
-  useEffect(() => {
-    if (image) {
-      Image.getSize(image, (width, height) => setRatio(width / height));
-    }
-  }, [image]);
 
   const goToProductPage = () => {
     navigation.navigate("ProductScreen", { id });
@@ -26,12 +19,7 @@ const ProductRecomCard = (props) => {
   return (
     <Pressable onPress={goToProductPage} style={styles.product}>
       <View>
-        <Image
-          source={{
-            uri: image,
-          }}
-          style={[styles.image, { aspectRatio: ratio }]}
-        />
+        <AspectImage image={image} />
         <View
           style={{
             display: "flex",

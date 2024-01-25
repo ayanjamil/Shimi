@@ -2,19 +2,12 @@ import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
+import AspectImage from "./AspectImage";
 
 const Product = (props) => {
   const { id, image, title } = props.product;
   const navigation = useNavigation();
-  const [ratio, setRatio] = useState(1);
-  
-  useEffect(() => {
-    if (image) {
-      Image.getSize(image, (width, height) => setRatio(width / height));
-    }
-  }, [image]);
-  
+
   const goToProductPage = () => {
     navigation.navigate("ProductScreen", { id });
   };
@@ -28,12 +21,7 @@ const Product = (props) => {
   return (
     <Pressable onPress={goToProductPage} style={styles.product}>
       <View>
-        <Image
-          source={{
-            uri: image,
-          }}
-          style={[styles.image, { aspectRatio: ratio }]}
-        />
+        <AspectImage image={image} />
         <Pressable onPress={onLike} style={styles.heartBtn}>
           <AntDesign name="hearto" size={16} color="white" />
         </Pressable>

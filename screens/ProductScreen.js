@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ScrollView, View, Text, StyleSheet, Image, Pressable } from "react-native";
 
 // use safe area views in the future for better user experience
@@ -13,29 +13,20 @@ import ProductRecomList from "../components/ProductRecomList";
 
 const ProductScreen = () => {
   const [product, setProduct] = useState(null);
-  const [image, setImage] = useState(null);
-  const [ratio, setRatio] = useState(1);
 
   const navigation = useNavigation();
   const route = useRoute();
 
   const productId = route.params?.id;
 
-  const fetchProduct = (productId) => {
+  const fetchProduct = useCallback((productId) => {
     const fetchedProduct = usables.find((product) => product.id === productId);
     setProduct(fetchedProduct);
-    setImage(fetchedProduct.image);
-  };
- 
-  useEffect(() => {
-    if (image) {
-      Image.getSize(image, (width, height) => setRatio(width / height));
-    }
-  }, [image]);
+  }, []);
  
   useEffect(() => {
     fetchProduct(productId);
-  }, [productId]);
+  }, [fetchProduct, productId]);
 
   const goBack = () => {
     navigation.goBack();
@@ -53,6 +44,7 @@ const ProductScreen = () => {
 
       <View style={styles.exploreMore}>
         <View style={styles.brandContainer}>
+          {/* Brand image and name */}
           <View
             style={{
               display: "flex",
@@ -66,6 +58,8 @@ const ProductScreen = () => {
             />
             <Text style={styles.title}>{ product.storeName }</Text>
           </View>
+
+          {/* Shop button */}
           <Pressable
             onPress={() => console.log("Shop button pressed")}
             style={styles.shopBtn}
