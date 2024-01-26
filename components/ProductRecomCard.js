@@ -27,12 +27,9 @@ const ProductRecomCard = (props) => {
             alignItems: "center",
           }}
         >
-          <Image
-            source={{ uri: storeImage }}
-            style={styles.icon}
-          />
+          <Image source={{ uri: storeImage }} style={styles.icon} />
           <Text style={styles.subtitle} numberOfLines={2}>
-            { storeName }
+            {storeName}
           </Text>
         </View>
         <Text style={styles.title} numberOfLines={2}>

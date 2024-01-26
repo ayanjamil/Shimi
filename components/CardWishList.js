@@ -6,9 +6,9 @@ import { Button } from ".";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const CardWishList = (props) =>{
+const CardWishList = (props) => {
   const { item, horizontal } = props;
-  const navigation=useNavigation(); 
+  const navigation = useNavigation();
   const renderStoreInfo = (item) => {
     return (
       <Block flex style={styles.store}>
@@ -66,8 +66,7 @@ const CardWishList = (props) =>{
       </TouchableWithoutFeedback>
     </Block>
   );
-
-}
+};
 
 CardWishList.propTypes = {
   item: PropTypes.object,

@@ -1,6 +1,12 @@
-
 import { useCallback, useEffect, useState } from "react";
-import { ScrollView, View, Text, StyleSheet, Image, Pressable } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
 
 // use safe area views in the future for better user experience
 // import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,11 +25,16 @@ const ProductScreen = () => {
 
   const productId = route.params?.id;
 
-  const fetchProduct = useCallback((productId) => {
-    const fetchedProduct = usables.find((product) => product.id === productId);
-    setProduct(fetchedProduct);
-  }, []);
- 
+  const fetchProduct = useCallback(
+    (productId) => {
+      const fetchedProduct = usables.find(
+        (product) => product.id === productId
+      );
+      setProduct(fetchedProduct);
+    },
+    [setProduct]
+  );
+
   useEffect(() => {
     fetchProduct(productId);
   }, [fetchProduct, productId]);
@@ -56,7 +67,7 @@ const ProductScreen = () => {
               source={{ uri: product.storeImage }}
               style={{ width: 40, height: 40, borderRadius: 50 }}
             />
-            <Text style={styles.title}>{ product.storeName }</Text>
+            <Text style={styles.title}>{product.storeName}</Text>
           </View>
 
           {/* Shop button */}
@@ -69,7 +80,9 @@ const ProductScreen = () => {
             </Text>
           </Pressable>
         </View>
-        <Text style={styles.title} numberOfLines={2}>{ !!product && product.title }</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {!!product && product.title}
+        </Text>
         <ProductRecomList products={usables} />
       </View>
 

@@ -12,11 +12,13 @@ const Product = (props) => {
     navigation.navigate("ProductScreen", { id });
   };
 
-  const onLike = () => { console.log("Liked a product") };
-  
+  const onLike = () => {
+    console.log("Liked a product");
+  };
+
   const onCopy = () => {
-    console.log("Copy button pressed")
-   };
+    console.log("Copy button pressed");
+  };
 
   return (
     <Pressable onPress={goToProductPage} style={styles.product}>

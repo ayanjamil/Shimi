@@ -21,22 +21,13 @@ import ProductRecomList from "../components/ProductRecomList";
 import SearchProduct from "../components/SearchProduct";
 
 const SearchScreen = () => {
-  
   const [image, setImage] = useState(null);
-  const [ratio, setRatio] = useState(1);
 
   const navigation = useNavigation();
-
-  useEffect(() => {
-    if (image) {
-      Image.getSize(image, (width, height) => setRatio(width / height));
-    }
-  }, [image]);
 
   const goBack = () => {
     navigation.goBack();
   };
-
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.root}>
@@ -63,10 +54,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "white",
-  },
-  image: {
-    width: "100%",
-    borderRadius: 50,
   },
   title: {
     margin: 20,

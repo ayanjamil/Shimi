@@ -10,7 +10,6 @@ const ProductCard = (props) => {
     console.log("Liked a pin");
   };
 
-
   return (
     <View>
       <AspectImage image={image} />
@@ -18,16 +17,15 @@ const ProductCard = (props) => {
       <Pressable onPress={onLike} style={styles.heartBtn}>
         <Ionicons name="heart-outline" size={24} color="white" />
       </Pressable>
-        
+
       <Pressable style={styles.linkBtn}>
         <Entypo name="link" size={24} color="white" />
       </Pressable>
-        
+
       <Pressable style={styles.pricetag}>
         <Ionicons name="pricetag-outline" size={20} color="black" />
         <Text style={styles.priceText}>£200</Text>
       </Pressable>
-          
     </View>
   );
 };

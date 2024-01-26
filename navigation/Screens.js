@@ -32,7 +32,6 @@ const { width } = Dimensions.get("screen");
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
-
 function WishlistStack(props) {
   return (
     <Stack.Navigator

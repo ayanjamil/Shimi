@@ -5,8 +5,8 @@ const AspectImage = ({ image }) => {
   const [ratio, setRatio] = useState(1);
   const [imageUri, setImageUri] = useState("");
 
-  const fetchImage = useCallback(async () => {
-      setImageUri(image);
+  const fetchImage = useCallback(() => {
+    setImageUri(image);
   }, [image]);
 
   useEffect(() => {

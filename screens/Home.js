@@ -15,6 +15,7 @@ import { HeaderHeight } from "../constants/utils";
 import usables from "../constants/usables";
 
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -22,9 +23,10 @@ const thumbMeasure = (width - 48 - 32) / 3;
 const loading = false;
 
 const Home = (props) => {
+  const navigation = useNavigation();
   const goToSearch = () => {
-    this.props.navigation.navigate("Search");
-  }
+    navigation.navigate("Search");
+  };
 
   return (
     <Block flex style={styles.homeContainer}>
@@ -67,7 +69,7 @@ const Home = (props) => {
       </ScrollView>
     </Block>
   );
-}
+};
 
 const styles = StyleSheet.create({
   homeContainer: {
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 20,
     top: 20,
-  }
+  },
 });
 
 export default Home;

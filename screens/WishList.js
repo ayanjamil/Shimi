@@ -4,15 +4,17 @@ import React from "react";
 import CardWishList from "../components/CardWishList";
 import usables from "../constants/usables";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
-class WishList extends React.Component {
-  goBack = () => {
-    this.props.navigation.goBack();
-  }
+const WishList = (props) => {
+  const navigation = useNavigation();
+  const goBack = () => {
+    navigation.goBack();
+  };
 
-  renderCards = () => {
+  const renderCards = () => {
     return (
       <Block flex style={styles.articles}>
         {usables.map((item, index) => (
@@ -27,24 +29,22 @@ class WishList extends React.Component {
     );
   };
 
-  render() {
-    return (
-      <Block>
-        <Text bold style={styles.headItems}>
-          {usables.length} items
-        </Text>
-        <Block style={styles.scrollView}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {this.renderCards()}
-          </ScrollView>
-        </Block>
-        {/* <Pressable onPress={this.goBack} style={styles.backBtn}>
-          <Ionicons name={"chevron-back"} size={35} color={"black"} />
-        </Pressable> */}
+  return (
+    <Block>
+      <Text bold style={styles.headItems}>
+        {usables.length} items
+      </Text>
+      <Block style={styles.scrollView}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {renderCards()}
+        </ScrollView>
       </Block>
-    );
-  }
-}
+      {/* <Pressable onPress={this.goBack} style={styles.backBtn}>
+        <Ionicons name={"chevron-back"} size={35} color={"black"} />
+      </Pressable> */}
+    </Block>
+  );
+};
 
 const styles = StyleSheet.create({
   headItems: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   backBtn: {
     position: "absolute",
     left: 10,
-  }
+  },
 });
 
 export default WishList;
