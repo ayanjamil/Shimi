@@ -73,7 +73,7 @@ class Onboarding extends React.Component {
                 borderRadius: 25,
               }}
               // onPress={() => console.log("Sign Up Pressed")}
-              onPress={() => navigation.navigate("SignUp")}
+              onPress={() => navigation.navigate("App")}
             >
               <Text center bold style={styles.text}>
                 Sign Up
