@@ -15,6 +15,8 @@ import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
 import Wishlist from "../screens/WishList";
+import ProductScreen from "../screens/ProductScreen";
+import SearchScreen from "../screens/SearchScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -29,45 +31,6 @@ const { width } = Dimensions.get("screen");
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
-
-// function ElementsStack(props) {
-//   return (
-//     <Stack.Navigator
-//       screenOptions={{
-//         mode: "card",
-//         headerShown: false,
-//       }}
-//     >
-//       <Stack.Screen
-//         name="Elements"
-//         component={Elements}
-//         options={{
-//           header: ({ navigation, scene }) => (
-//             <Header title="Elements" navigation={navigation} scene={scene} />
-//           ),
-//           cardStyle: { backgroundColor: "#F8F9FE" },
-//         }}
-//       />
-//       <Stack.Screen
-//         name="Pro"
-//         component={Pro}
-//         options={{
-//           header: ({ navigation, scene }) => (
-//             <Header
-//               title=""
-//               back
-//               white
-//               transparent
-//               navigation={navigation}
-//               scene={scene}
-//             />
-//           ),
-//           headerTransparent: true,
-//         }}
-//       />
-//     </Stack.Navigator>
-//   );
-// }
 
 function WishlistStack(props) {
   return (
@@ -193,6 +156,40 @@ function HomeStack(props) {
         }}
       />
       <Stack.Screen
+        name="ProductScreen"
+        component={ProductScreen}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
         name="Pro"
         component={Pro}
         options={{
@@ -249,7 +246,7 @@ function AppStack(props) {
       }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeStack}
         options={{
           tabBarShowLabel: false,

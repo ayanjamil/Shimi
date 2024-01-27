@@ -2,43 +2,32 @@ import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
+import AspectImage from "./AspectImage";
 
-const Pin = (props) => {
-  const { id, image, title } = props.pin;
-
+const Product = (props) => {
+  const { id, image, title } = props.product;
   const navigation = useNavigation();
-  const [ratio, setRatio] = useState(1);
-  
-  useEffect(() => {
-    if (image) {
-      Image.getSize(image, (width, height) => setRatio(width / height));
-    }
-  }, [image]);
-  
-  const goToPinPage = () => {
-    console.log("Pin pressed")
+
+  const goToProductPage = () => {
+    navigation.navigate("ProductScreen", { id });
   };
 
-  const onLike = () => { console.log("Liked a pin") };
-  
-  const goToMore = () => {
-    console.log("More pressed")
-   };
+  const onLike = () => {
+    console.log("Liked a product");
+  };
+
+  const onCopy = () => {
+    console.log("Copy button pressed");
+  };
 
   return (
-    <Pressable onPress={goToPinPage} style={styles.pin}>
+    <Pressable onPress={goToProductPage} style={styles.product}>
       <View>
-        <Image
-          source={{
-            uri: image,
-          }}
-          style={[styles.image, { aspectRatio: ratio }]}
-        />
+        <AspectImage image={image} />
         <Pressable onPress={onLike} style={styles.heartBtn}>
           <AntDesign name="hearto" size={16} color="white" />
         </Pressable>
-        <Pressable onPress={goToMore} style={styles.moreBtn}>
+        <Pressable onPress={onCopy} style={styles.moreBtn}>
           <Feather name="copy" size={16} color="white" />
         </Pressable>
       </View>
@@ -47,9 +36,9 @@ const Pin = (props) => {
 };
 
 const styles = StyleSheet.create({
-  pin: {
+  product: {
     width: "100%",
-    padding: 4,
+    padding: 6,
   },
   title: {
     fontSize: 16,
@@ -80,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Pin;
+export default Product;

@@ -303,17 +303,12 @@ class Header extends React.Component {
           style={navbarStyles}
           transparent={transparent}
           right={this.renderRight()}
-          rightStyle={{ alignItems: "center" }}
-          left={
-            <Icon
-              name="chevron-left"
-              family="entypo"
-              size={30}
-              onPress={this.handleLeftPress}
-              style={{ marginTop: 2, marginHorizontal: 5 }}
-            />
-          }
-          titleStyle={[styles.title, titleColor && { color: titleColor }]}
+          rightStyle={{ alignItems: 'center' }}
+          titleStyle={[
+            styles.title,
+            { color: argonTheme.COLORS[white ? 'WHITE' : 'HEADER'] },
+            titleColor && { color: titleColor }
+          ]}
           {...props}
         />
         {this.renderHeader()}

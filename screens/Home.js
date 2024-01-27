@@ -5,62 +5,71 @@ import {
   Image,
   ScrollView,
   Platform,
+  Pressable,
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
 import { Input } from "../components";
 import MasonryList from "../components/MasonryList";
 import { HeaderHeight } from "../constants/utils";
-// import pins from "../constants/pins";
 import usables from "../constants/usables";
 
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 const loading = false;
 
-class Home extends React.Component {
-  render() {
-    return (
-      <Block flex style={styles.homeContainer}>
-        <ScrollView style={{ width, marginTop: "20%" }}>
-          <Block flex style={styles.homeTop}>
-            {/* shimi logo */}
-            <Block middle style={{ marginTop: 40 }}>
-              <Image
-                source={require("../assets/imgs/shimi.png")}
-                style={{ marginBottom: 30 }}
-              />
-            </Block>
+const Home = (props) => {
+  const navigation = useNavigation();
+  const goToSearch = () => {
+    navigation.navigate("Search");
+  };
 
-            {/* search bar */}
-            <Block flex>
-              <Input
-                placeholder="Search Shimi"
-                shadowless
-                iconContent={
-                  <FontAwesome
-                    name="search"
-                    size={16}
-                    style={{ marginRight: 10 }}
-                    color="grey"
-                  />
-                }
-              />
-            </Block>
+  return (
+    <Block flex style={styles.homeContainer}>
+      <ScrollView style={{ width, marginTop: "20%" }}>
+        <Block flex style={styles.homeTop}>
+          {/* shimi logo */}
+          <Block middle style={{ marginTop: 40 }}>
+            <Image
+              source={require("../assets/imgs/shimi.png")}
+              style={{ marginBottom: 30 }}
+            />
           </Block>
 
-          {/* masonry layout */}
+          {/* search bar */}
           <Block flex>
-            <MasonryList pins={usables} refreshing={loading} />
+            <Input
+              placeholder="Search Shimi"
+              shadowless
+              iconContent={
+                <FontAwesome
+                  name="search"
+                  size={16}
+                  style={{ marginRight: 10 }}
+                  color="grey"
+                />
+              }
+            />
           </Block>
-        </ScrollView>
-      </Block>
-    );
-  }
-}
+        </Block>
+
+        {/* masonry layout */}
+        <Block flex>
+          <MasonryList products={usables} refreshing={loading} />
+        </Block>
+        {/* <Pressable onPress={ 
+          goToSearch
+          } style={styles.camBtn}>
+          <FontAwesome name="camera" size={24} color="grey" />
+        </Pressable> */}
+      </ScrollView>
+    </Block>
+  );
+};
 
 const styles = StyleSheet.create({
   homeContainer: {
@@ -81,6 +90,11 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.2,
     zIndex: 2,
+  },
+  camBtn: {
+    position: "absolute",
+    right: 20,
+    top: 20,
   },
 });
 

@@ -1,3 +1,5 @@
+// explore list, masonry list but uses explore list usables, also width is reduced to make it 3 columns
+
 import {
   StyleSheet,
   ScrollView,
@@ -6,11 +8,16 @@ import {
   View,
 } from "react-native";
 
-import Product from "./Product";
+import ProductRecomCard from "./ProductRecomCard";
 
-const MasonryList = ({ products, refreshing = false, onRefresh = () => {} }) => {
+const ProductRecomList = ({
+  products,
+  refreshing = false,
+  onRefresh = () => {},
+}) => {
   const width = useWindowDimensions().width;
-  const numColumns = Math.ceil(width / 350);
+  const numColumns = Math.ceil(width / 150);
+
   return (
     <ScrollView
       contentContainerStyle={{ width: "100%" }}
@@ -24,7 +31,7 @@ const MasonryList = ({ products, refreshing = false, onRefresh = () => {} }) => 
             {products
               .filter((_, index) => index % numColumns === colIndex)
               .map((product) => (
-                <Product product={product} key={product.id} />
+                <ProductRecomCard product={product} key={product.id} />
               ))}
           </View>
         ))}
@@ -32,9 +39,10 @@ const MasonryList = ({ products, refreshing = false, onRefresh = () => {} }) => 
     </ScrollView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
+    padding: 10,
     flexDirection: "row",
   },
   column: {
@@ -42,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MasonryList;
+export default ProductRecomList;
