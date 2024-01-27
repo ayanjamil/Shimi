@@ -23,9 +23,12 @@ class Onboarding extends React.Component {
           />
         </Block>
         <Block flex style={{ flex: 6 }}>
-          <Block center>
-            <Image source={Images.LogoOnboarding} style={styles.logo} />
-          </Block>
+          <TouchableOpacity onPress={() => navigation.navigate("App")}>
+            <Block center>
+              <Image source={Images.LogoOnboarding} style={styles.logo} />
+            </Block>
+          </TouchableOpacity>
+
           <Block style={{ marginVertical: 50 }}>
             <Text
               center
@@ -73,7 +76,6 @@ class Onboarding extends React.Component {
                 borderRadius: 25,
               }}
               // onPress={() => console.log("Sign Up Pressed")}
-              onPress={() => navigation.navigate("SignUp")}
             >
               <Text center bold style={styles.text}>
                 Sign Up
