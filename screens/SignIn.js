@@ -13,36 +13,20 @@ import { Button, Header, Icon, Input, Select, Switch } from "../components";
 import { Block, Text, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 const { height, width } = Dimensions.get("screen");
-import Images from "../constants/Images";
-import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 
 const SignIn = (props) => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("ayanjamil00@gmail.com");
-  const [password, setPassword] = useState("ayan@13");
-  // const handleSignUp = async () => {
-  //   const auth = getAuth();
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       console.log(user.email);
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(errorCode);
-  //       console.log(errorMessage);
-  //     });
-  // };
+  const [password, setPassword] = useState("ayan@123");
   const onHandleLogin = () => {
     if (email !== "" && password !== "") {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
+          navigation.navigate("App");
           console.log("Login success");
         })
         .catch((err) => {

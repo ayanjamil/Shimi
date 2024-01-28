@@ -17,10 +17,11 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, database } from "../config/firebase";
 
 const SignUp = (props) => {
+  const navigation = useNavigation();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("ayanjamil00@gmail.com");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("ayan@123");
+  const [password, setPassword] = useState("");
 
   const onHandleSignup = async () => {
     try {
@@ -38,8 +39,10 @@ const SignUp = (props) => {
       //   photoURL: imageURL || profile,
       //   phoneNumber: "",
       // });
-      // for adding phonenumber and name to database(would have to enable firestore)
+      //  adding phonenumber and name to database(would have to enable firestore)
       console.log(user.email);
+      navigation.navigate("App");
+      //can use State Management to make
     } catch (error) {
       Alert.alert(error.message);
       console.log(Alert.alert(error.message));
