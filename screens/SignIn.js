@@ -17,28 +17,40 @@ import Images from "../constants/Images";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 const SignIn = (props) => {
   const [email, setEmail] = useState("ayanjamil00@gmail.com");
-  const [password, setPassword] = useState("ayan@123");
-  const handleSignUp = async () => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user.email);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-      });
+  const [password, setPassword] = useState("ayan@13");
+  // const handleSignUp = async () => {
+  //   const auth = getAuth();
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       const user = userCredential.user;
+  //       console.log(user.email);
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.log(errorCode);
+  //       console.log(errorMessage);
+  //     });
+  // };
+  const onHandleLogin = () => {
+    if (email !== "" && password !== "") {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          console.log("Login success");
+        })
+        .catch((err) => {
+          console.log("Login failed");
+          Alert.alert("Login error", err.message);
+        });
+    }
   };
-  // console.log(email);
 
   return (
     <Block flex style={{ backgroundColor: "white", flex: 1 }}>
@@ -98,11 +110,7 @@ const SignIn = (props) => {
               paddingVertical: 15,
               borderRadius: 10,
             }}
-            onPress={() => {
-              console.log("Create Account Pressed");
-              handleSignUp;
-              // useNavigation.navigate("App");
-            }}
+            onPress={onHandleLogin}
           >
             <Text color="white" center bold style={styles.text}>
               Sign In
