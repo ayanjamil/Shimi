@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   Image,
@@ -16,15 +16,88 @@ const { height, width } = Dimensions.get("screen");
 import Images from "../constants/Images";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  confirmPasswordReset,
+} from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { initializeAuth } from "firebase/auth";
+import { getReactNativePersistence } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
+  authDomain: "shimi-1c1e8.firebaseapp.com",
+  projectId: "shimi-1c1e8",
+  storageBucket: "shimi-1c1e8.appspot.com",
+  messagingSenderId: "904122348831",
+  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
+  measurementId: "G-C56NV5V0ZZ",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const SignUp = (props) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("shimi@123");
+  const handleSignUp = async () => {
+    const auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+    // use call back
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // async function
+        const user = userCredential.user;
+        console.log(user.email);
+        // ...
+      })
+
+      .catch((error) => {
+        const errorCode = error.code;
+
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+        // ..
+      });
+    // const user = await createUserWithEmailAndPassword(auth,email,password) \
+    //convert to async function  use effect or use callback
+  };
+
   return (
     <Block flex style={{ backgroundColor: "white", flex: 1 }}>
       <Text center size={35} bold style={{ marginVertical: 40 }}>
-        Sign In
+        Sign
       </Text>
       <Block flex style={{ flex: 1 }}>
         <Block style={styles.blocks}>
+          {/* <Block style={{}}>
+            <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
+              Full Name
+            </Text>
+            <Input
+              title="Full Name"
+              value={name}
+              onChangeText={(name) => setName(name)}
+              placeholder=""
+              shadowless
+              iconContent={
+                <Icon
+                  size={23}
+                  style={{ marginRight: 10 }}
+                  color={"#888888"}
+                  name="person"
+                  family=" Ionicons"
+                />
+              }
+            />
+          </Block> */}
+
           <Block style={{}}>
             <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
               Email
@@ -33,6 +106,8 @@ const SignUp = (props) => {
               title="Full Name"
               placeholder=""
               shadowless
+              value={email}
+              onChangeText={(email) => setEmail(email)}
               iconContent={
                 <Icon
                   size={23}
@@ -44,6 +119,27 @@ const SignUp = (props) => {
               }
             />
           </Block>
+          {/* <Block style={{}}>
+            <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
+              Phone
+            </Text>
+            <Input
+              title="Full Name"
+              placeholder=""
+              shadowless
+              value={phone}
+              onChangeText={(phone) => setPhone(phone)}
+              iconContent={
+                <Icon
+                  size={23}
+                  style={{ marginRight: 10 }}
+                  color={"#888888"}
+                  name="phone"
+                  family=" Ionicons"
+                />
+              }
+            />
+          </Block> */}
 
           <Block style={{}}>
             <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
@@ -53,6 +149,9 @@ const SignUp = (props) => {
               title="Full Name"
               placeholder=""
               shadowless
+              secureTextEntry={true}
+              value={password}
+              onChangeText={(password) => setPassword(password)}
               iconContent={
                 <Icon
                   size={23}
@@ -72,7 +171,7 @@ const SignUp = (props) => {
               paddingVertical: 15,
               borderRadius: 10,
             }}
-            onPress={() => console.log("Create Account Pressed")}
+            onPress={handleSignUp}
           >
             <Text color="white" center bold style={styles.text}>
               Sign In
@@ -187,4 +286,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+export default SignUp;

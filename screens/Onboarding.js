@@ -11,9 +11,9 @@ import { Block, Button, Text, theme } from "galio-framework";
 const { height, width } = Dimensions.get("screen");
 import Images from "../constants/Images";
 import { useNavigation } from "@react-navigation/native";
-
-const Onboardinig = (props) => {
+const Onboarding = (props) => {
   const navigation = useNavigation();
+
   return (
     <Block flex style={styles.container}>
       <Block flex center>
@@ -75,7 +75,7 @@ const Onboardinig = (props) => {
               paddingHorizontal: 20,
               borderRadius: 25,
             }}
-            onPress={() => console.log("Sign Up Pressed")}
+            onPress={() => navigation.navigate("SignUp")}
           >
             <Text center bold style={styles.text}>
               Sign Up
@@ -89,7 +89,7 @@ const Onboardinig = (props) => {
 
               borderRadius: 25,
             }}
-            onPress={() => console.log("Continue with Google Pressed")}
+            onPress={() => {}}
           >
             <Text center bold style={styles.text}>
               Continue with Google
@@ -98,7 +98,7 @@ const Onboardinig = (props) => {
         </Block>
         <Block flex center style={{ flexDirection: "row" }}>
           <Text style={{ fontSize: 16 }}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => console.log("Button Pressed")}>
+          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
             <Text
               center
               style={{
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
   loginText: {},
 });
 
-export default Onboardinig;
+export default Onboarding;

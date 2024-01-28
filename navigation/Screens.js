@@ -15,9 +15,10 @@ import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
 import Wishlist from "../screens/WishList";
-import SignUp from "../screens/SignUp";
 import ProductScreen from "../screens/ProductScreen";
 import SearchScreen from "../screens/SearchScreen";
+import SignIn from "../screens/SignIn";
+import SignUp from "../screens/SignUp";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -227,6 +228,40 @@ export default function OnboardingStack(props) {
         }}
       />
       <Stack.Screen name="App" component={AppStack} />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
     </Stack.Navigator>
   );
 }
