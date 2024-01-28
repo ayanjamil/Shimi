@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   Image,
@@ -17,7 +17,29 @@ import Images from "../constants/Images";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 const SignIn = (props) => {
+  const [email, setEmail] = useState("ayanjamil00@gmail.com");
+  const [password, setPassword] = useState("ayan@123");
+  const handleSignUp = async () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user.email);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
+  // console.log(email);
+
   return (
     <Block flex style={{ backgroundColor: "white", flex: 1 }}>
       <Text center size={35} bold style={{ marginVertical: 40 }}>
@@ -33,6 +55,8 @@ const SignIn = (props) => {
               title="Full Name"
               placeholder=""
               shadowless
+              value={email}
+              onChangeText={(email) => setEmail(email)}
               iconContent={
                 <Icon
                   size={23}
@@ -53,6 +77,8 @@ const SignIn = (props) => {
               title="Full Name"
               placeholder=""
               shadowless
+              value={password}
+              onChangeText={(password) => setPassword(password)}
               iconContent={
                 <Icon
                   size={23}
@@ -72,7 +98,11 @@ const SignIn = (props) => {
               paddingVertical: 15,
               borderRadius: 10,
             }}
-            onPress={() => console.log("Create Account Pressed")}
+            onPress={() => {
+              console.log("Create Account Pressed");
+              handleSignUp;
+              // useNavigation.navigate("App");
+            }}
           >
             <Text color="white" center bold style={styles.text}>
               Sign In

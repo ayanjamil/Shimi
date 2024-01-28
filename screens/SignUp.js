@@ -16,63 +16,40 @@ const { height, width } = Dimensions.get("screen");
 import Images from "../constants/Images";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  confirmPasswordReset,
-} from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { initializeAuth } from "firebase/auth";
-import { getReactNativePersistence } from "firebase/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
-  authDomain: "shimi-1c1e8.firebaseapp.com",
-  projectId: "shimi-1c1e8",
-  storageBucket: "shimi-1c1e8.appspot.com",
-  messagingSenderId: "904122348831",
-  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
-  measurementId: "G-C56NV5V0ZZ",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, database } from "../config/firebase";
 
 const SignUp = (props) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("ayanjamil00@gmail.com");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("shimi@123");
-  const handleSignUp = async () => {
-    const auth = initializeAuth(app, {
-      persistence: getReactNativePersistence(AsyncStorage),
-    });
-    // use call back
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // async function
-        const user = userCredential.user;
-        console.log(user.email);
-        // ...
-      })
+  const [password, setPassword] = useState("ayan@123");
 
-      .catch((error) => {
-        const errorCode = error.code;
-
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        // ..
+  const onHandleSignup = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      const userRef = doc(database, "users", user.uid);
+      await setDoc(userRef, {
+        displayName: name,
+        email: email,
+        uid: user.uid,
+        photoURL: imageURL || profile,
+        phoneNumber: "",
       });
-    // const user = await createUserWithEmailAndPassword(auth,email,password) \
-    //convert to async function  use effect or use callback
+    } catch (error) {
+      Alert.alert(error.message);
+    }
   };
-
   return (
     <Block flex style={{ backgroundColor: "white", flex: 1 }}>
       <Text center size={35} bold style={{ marginVertical: 40 }}>
-        Sign
+        Sign Up
       </Text>
       <Block flex style={{ flex: 1 }}>
         <Block style={styles.blocks}>
@@ -171,10 +148,10 @@ const SignUp = (props) => {
               paddingVertical: 15,
               borderRadius: 10,
             }}
-            onPress={handleSignUp}
+            onPress={onHandleSignup}
           >
             <Text color="white" center bold style={styles.text}>
-              Sign In
+              Sign Up
             </Text>
           </TouchableOpacity>
           <Text
