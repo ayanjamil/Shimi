@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
-  Image,
   StyleSheet,
-  StatusBar,
   Dimensions,
   TouchableOpacity,
   TextInput,
   View,
 } from "react-native";
-import { Button, Header, Icon, Input, Select, Switch } from "../components";
+import { Icon, Input } from "../components";
 import { Block, Text, theme } from "galio-framework";
-import { argonTheme, tabs } from "../constants";
+
 const { height, width } = Dimensions.get("screen");
-import Images from "../constants/Images";
-import { ScrollView } from "react-native-gesture-handler";
+
 import { useNavigation } from "@react-navigation/native";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -34,16 +30,19 @@ const SignUp = (props) => {
         password
       );
       const user = userCredential.user;
-      const userRef = doc(database, "users", user.uid);
-      await setDoc(userRef, {
-        displayName: name,
-        email: email,
-        uid: user.uid,
-        photoURL: imageURL || profile,
-        phoneNumber: "",
-      });
+      // const userRef = doc(database, "users", user.uid);
+      // await setDoc(userRef, {
+      //   displayName: name,
+      //   email: email,
+      //   uid: user.uid,
+      //   photoURL: imageURL || profile,
+      //   phoneNumber: "",
+      // });
+      // for adding phonenumber and name to database(would have to enable firestore)
+      console.log(user.email);
     } catch (error) {
       Alert.alert(error.message);
+      console.log(Alert.alert(error.message));
     }
   };
   return (
