@@ -8,3 +8,5 @@ package-lock.json
 *.mobileprovision
 .idea
 .vscode
+.env
+config/firebase.js

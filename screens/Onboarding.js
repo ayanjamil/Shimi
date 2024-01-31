@@ -11,8 +11,29 @@ import { Block, Button, Text, theme } from "galio-framework";
 const { height, width } = Dimensions.get("screen");
 import Images from "../constants/Images";
 import { useNavigation } from "@react-navigation/native";
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 const Onboarding = (props) => {
   const navigation = useNavigation();
+
+  const auth = getAuth();
+
+  const handleAuth = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      console.log("entered try block");
+      const result = await signInWithPopup(auth, provider);
+      if (result) {
+        const user = result.user;
+        const credential = provider.credentialFromResult(auth, result);
+        const token = credential.accessToken;
+      }
+      navigation.navigate("App");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Block flex style={styles.container}>
@@ -89,7 +110,7 @@ const Onboarding = (props) => {
 
               borderRadius: 25,
             }}
-            onPress={() => {}}
+            onPress={() => handleAuth}
           >
             <Text center bold style={styles.text}>
               Continue with Google

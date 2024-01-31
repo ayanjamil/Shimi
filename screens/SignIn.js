@@ -20,19 +20,17 @@ import { auth } from "../config/firebase";
 
 const SignIn = (props) => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("ayanjamil00@gmail.com");
-  const [password, setPassword] = useState("ayan@123");
-  const onHandleLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          navigation.navigate("App");
-          console.log("Login success");
-        })
-        .catch((err) => {
-          console.log("Login failed");
-          Alert.alert("Login error", err.message);
-        });
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigation.navigate("App");
+      } catch (err) {
+        console.log("Login failed");
+        Alert.alert("Login error", err.message);
+      }
     }
   };
 
@@ -137,31 +135,6 @@ const SignIn = (props) => {
             </TouchableOpacity>
           </Block>
         </Block>
-      </Block>
-      <Block
-        flex
-        center
-        style={{
-          flexDirection: "row",
-          marginTop: 10,
-          alignItems: "flex-end",
-          marginVertical: 20,
-        }}
-      >
-        <Text style={{ fontSize: 16 }}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => console.log("Button Pressed")}>
-          <Text
-            center
-            style={{
-              color: "blue",
-              alignSelf: "center",
-              marginHorizontal: 5,
-              fontSize: 16,
-            }}
-          >
-            Login
-          </Text>
-        </TouchableOpacity>
       </Block>
     </Block>
   );

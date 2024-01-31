@@ -42,7 +42,7 @@ const SignUp = (props) => {
       //  adding phonenumber and name to database(would have to enable firestore)
       console.log(user.email);
       navigation.navigate("App");
-      //can use State Management to make
+      //can use State Management to make it better
     } catch (error) {
       Alert.alert(error.message);
       console.log(Alert.alert(error.message));
@@ -205,7 +205,7 @@ const SignUp = (props) => {
         }}
       >
         <Text style={{ fontSize: 16 }}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => console.log("Button Pressed")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
           <Text
             center
             style={{
