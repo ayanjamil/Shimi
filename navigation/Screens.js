@@ -19,6 +19,7 @@ import ProductScreen from "../screens/ProductScreen";
 import SearchScreen from "../screens/SearchScreen";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
+import ForgotScreen from "../screens/ForgotScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -248,6 +249,23 @@ export default function OnboardingStack(props) {
       <Stack.Screen
         name="SignUp"
         component={SignUp}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="ForgotScreen"
+        component={ForgotScreen}
         options={{
           header: ({ navigation, scene }) => (
             <Header

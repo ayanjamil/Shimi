@@ -98,17 +98,20 @@ const SignIn = (props) => {
               Sign In
             </Text>
           </TouchableOpacity>
-          <Text
-            color="black"
-            center
-            bold
-            style={{
-              fontSize: 16,
-              marginVertical: 20,
-            }}
-          >
-            Forgot Password?
-          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("ForgotScreen")}>
+            <Text
+              color="black"
+              center
+              bold
+              style={{
+                fontSize: 16,
+                marginVertical: 20,
+              }}
+            >
+              Forgot Password?
+            </Text>
+          </TouchableOpacity>
+
           <View style={styles.containerDivider}>
             <View style={styles.line} />
             <Text style={styles.textDivider}>OR</Text>
@@ -127,7 +130,6 @@ const SignIn = (props) => {
                 paddingVertical: 15,
                 borderRadius: 10,
               }}
-              onPress={() => console.log("Sign up with Google Pressed")}
             >
               <Text color="black" center bold style={styles.text}>
                 Sign up with Google
