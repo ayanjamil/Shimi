@@ -1,4 +1,4 @@
-import { Animated, Dimensions, Easing } from "react-native";
+import { Animated, Dimensions, Easing, View, Pressable } from "react-native";
 // header for screens
 import { Header, Icon } from "../components";
 import { argonTheme, tabs } from "../constants";
@@ -173,7 +173,7 @@ function HomeStack(props) {
         }}
       />
       <Stack.Screen
-        name="Search"
+        name="SearchScreen"
         component={SearchScreen}
         options={{
           header: ({ navigation, scene }) => (

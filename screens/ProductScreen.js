@@ -25,15 +25,10 @@ const ProductScreen = () => {
 
   const productId = route.params?.id;
 
-  const fetchProduct = useCallback(
-    (productId) => {
-      const fetchedProduct = usables.find(
-        (product) => product.id === productId
-      );
-      setProduct(fetchedProduct);
-    },
-    [setProduct]
-  );
+  const fetchProduct = useCallback((productId) => {
+    const fetchedProduct = usables.find((product) => product.id === productId);
+    setProduct(fetchedProduct);
+  }, []);
 
   useEffect(() => {
     fetchProduct(productId);
@@ -85,10 +80,10 @@ const ProductScreen = () => {
         </Text>
         <ProductRecomList products={usables} />
       </View>
-
-      <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>
+      {/* Navigation icon */}
+      {/* <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>
         <Ionicons name={"chevron-back"} size={35} color={"black"} />
-      </Pressable>
+      </Pressable> */}
     </ScrollView>
   );
 };
@@ -115,7 +110,7 @@ const styles = StyleSheet.create({
     left: 10,
   },
   exploreMore: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   title: {
     fontSize: 22,

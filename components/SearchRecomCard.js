@@ -1,23 +1,20 @@
-// this component is for the products in the explore page
+// this component is for the products in the search page
 // key difference is that here no icons are used, and title and brand icons are displayed
 
 import { View, Image, Text, StyleSheet, Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import AspectImage from "./AspectImage";
 
-const ProductRecomCard = (props) => {
-  const { id, image, title, storeName, storeImage } = props.product;
-
-  const navigation = useNavigation();
-
-  const goToProductPage = () => {
-    navigation.navigate("ProductScreen", { id });
+const SearchRecomCard = (props) => {
+  const { position, price, thumbnail, title, source, source_icon } =
+    props.product;
+  // once there's integrated data ids, this can redirect each pin to the product page
+  const goToProduct = () => {
+    console.log("goToProduct", price.value);
   };
-
   return (
-    <Pressable onPress={goToProductPage} style={styles.product}>
+    <Pressable style={styles.product} onPress={goToProduct}>
       <View>
-        <AspectImage image={image} />
+        <AspectImage image={thumbnail} />
         <View
           style={{
             display: "flex",
@@ -26,9 +23,9 @@ const ProductRecomCard = (props) => {
             width: "80%",
           }}
         >
-          <Image source={{ uri: storeImage }} style={styles.icon} />
+          <Image source={{ uri: source_icon }} style={styles.icon} />
           <Text style={styles.subtitle} numberOfLines={1}>
-            {storeName}
+            {source}
           </Text>
         </View>
         <Text style={styles.title} numberOfLines={2}>
@@ -89,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductRecomCard;
+export default SearchRecomCard;

@@ -1,6 +1,5 @@
-import { View, Image, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Ionicons, Entypo } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import AspectImage from "./AspectImage";
 
 const ProductCard = (props) => {
@@ -31,10 +30,6 @@ const ProductCard = (props) => {
 };
 
 const styles = StyleSheet.create({
-  pin: {
-    width: "100%",
-    padding: 4,
-  },
   image: {
     width: "100%",
     borderRadius: 15,
