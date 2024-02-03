@@ -32,7 +32,7 @@ const ForgotScreen = (props) => {
   return (
     <Block flex style={{ backgroundColor: "white", flex: 1 }}>
       <Text center size={35} bold style={{ marginVertical: 40 }}>
-        Forgot Screen
+        Forgot Password
       </Text>
       <Block flex style={{ flex: 1 }}>
         <Block style={styles.blocks}>

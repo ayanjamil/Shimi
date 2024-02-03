@@ -15,21 +15,45 @@ import { argonTheme, tabs } from "../constants";
 const { height, width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
 
 const SignIn = (props) => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("ayanjamil00@gmail.com");
+  const [password, setPassword] = useState("ayan@123");
+
+  const checkUser = async (user) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        console.log(uid);
+        navigation.navigate("App");
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        console.log("user not defined");
+      }
+    });
+  };
+
   const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        navigation.navigate("App");
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+        console.log(user.email);
+        checkUser(user);
+        // navigation.navigate("App");
       } catch (err) {
-        console.log("Login failed");
-        Alert.alert("Login error", err.message);
+        console.log(err);
       }
     }
   };
