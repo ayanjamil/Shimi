@@ -21,6 +21,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import SearchProduct from "../components/SearchProduct";
 import SearchRecomList from "../components/SearchRecomList";
 import mockSearchResult from "../constants/mockSearchResults";
+import { generateUniqueImageName } from "../constants/utils";
 import { SEARCH_API_BASEURL } from "@env";
 
 const SearchScreen = (props) => {
@@ -35,14 +36,15 @@ const SearchScreen = (props) => {
 
   const uploadImage = useCallback(async (uri) => {
     setUploading(true);
+    const imageName = generateUniqueImageName();
     const formData = new FormData();
-
     formData.append("image", {
       uri: uri,
-      name: "image.jpg",
+      name: imageName,
       type: "image/jpeg",
     });
     formData.append("type", "search");
+
     try {
       const response = await fetch(SEARCH_API_BASEURL + "api/search_image", {
         method: "POST",
@@ -61,7 +63,7 @@ const SearchScreen = (props) => {
       //Alert user and go back to home screen
       Alert.alert(
         "Error",
-        "We're unable to search for this right now :( Please try again later"
+        "We're unable to search for this right now :( \nPlease try again later"
       );
       navigation.goBack();
     } finally {

@@ -4,11 +4,10 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default ImageUploadComponent = () =>{
+export default ImageUploadComponent = () => {
   const navigation = useNavigation();
 
   const goToSearch = (imageURI) => {
-    console.log("goToSearch");
     navigation.navigate("SearchScreen", { imageURI });
   };
 
@@ -64,4 +63,4 @@ export default ImageUploadComponent = () =>{
       />
     </Pressable>
   );
-}
+};
