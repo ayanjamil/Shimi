@@ -21,7 +21,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import SearchProduct from "../components/SearchProduct";
 import SearchRecomList from "../components/SearchRecomList";
 import mockSearchResult from "../constants/mockSearchResults";
-import { SEARCH_API_URL } from "../api/url";
+import { SEARCH_API_BASEURL } from "@env";
 
 const SearchScreen = (props) => {
   const [uploading, setUploading] = useState(false);
@@ -29,7 +29,6 @@ const SearchScreen = (props) => {
   const route = useRoute();
   const imageURI = route?.params?.imageURI;
   const navigation = useNavigation();
-
   useEffect(() => {
     uploadImage(imageURI);
   }, [uploadImage, imageURI]);
@@ -37,6 +36,7 @@ const SearchScreen = (props) => {
   const uploadImage = useCallback(async (uri) => {
     setUploading(true);
     const formData = new FormData();
+
     formData.append("image", {
       uri: uri,
       name: "image.jpg",
@@ -44,7 +44,7 @@ const SearchScreen = (props) => {
     });
     formData.append("type", "search");
     try {
-      const response = await fetch(SEARCH_API_URL, {
+      const response = await fetch(SEARCH_API_BASEURL + "api/search_image", {
         method: "POST",
         body: formData,
       });
@@ -61,11 +61,12 @@ const SearchScreen = (props) => {
       //Alert user and go back to home screen
       Alert.alert(
         "Error",
-        "Failed to fetch search results. Try again using a different image."
+        "We're unable to search for this right now :( Please try again later"
       );
       navigation.goBack();
+    } finally {
+      setUploading(false);
     }
-    setUploading(false);
   }, []);
 
   const goBack = () => {
