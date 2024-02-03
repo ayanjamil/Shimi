@@ -4,9 +4,8 @@
 import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import AspectImage from "./AspectImage";
 
-const SearchRecomCard = (props) => {
-  const { position, price, thumbnail, title, source, source_icon } =
-    props.product;
+const SearchRecomCard = ({ product }) => {
+  const { thumbnail, source, source_icon, title, price } = product;
   // once there's integrated data ids, this can redirect each pin to the product page
   const goToProduct = () => {
     console.log("goToProduct", price.value);

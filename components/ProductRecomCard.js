@@ -5,9 +5,8 @@ import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AspectImage from "./AspectImage";
 
-const ProductRecomCard = (props) => {
-  const { id, image, title, storeName, storeImage } = props.product;
-
+const ProductRecomCard = ({ product }) => {
+  const { image, storeImage, storeName, title, id } = product;
   const navigation = useNavigation();
 
   const goToProductPage = () => {

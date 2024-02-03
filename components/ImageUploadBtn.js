@@ -4,20 +4,8 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function ImageUploadComponent() {
+export default ImageUploadComponent = () =>{
   const navigation = useNavigation();
-
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
-  }, []);
 
   const goToSearch = (imageURI) => {
     console.log("goToSearch");
@@ -30,7 +18,6 @@ export default function ImageUploadComponent() {
     const options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [3, 4],
       quality: 1,
     };
     result = await ImagePicker.launchImageLibraryAsync(options);

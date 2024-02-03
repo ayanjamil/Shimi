@@ -3,15 +3,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AspectImage from "./AspectImage";
 import { useEffect, useState } from "react";
 
-const SearchProduct = (props) => {
-  const [uri, setUri] = useState(props.imageURI);
-  const imageURI = props.imageURI;
+const SearchProduct = ({ imageURI }) => {
+  const [uri, setUri] = useState(imageURI);
   const onLike = () => {
     console.log("Liked a product");
   };
   useEffect(() => {
     setUri(imageURI);
-  }, [props.ImageURI]);
+  }, [imageURI]);
 
   return (
     <View>
