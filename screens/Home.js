@@ -17,6 +17,7 @@ import usables from "../constants/usables";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import ImageUploadComponent from "../components/ImageUploadBtn";
+import HomeProductList from "../components/HomeProductList";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -55,13 +56,8 @@ const Home = () => {
 
         {/* masonry layout */}
         <Block flex>
-          <MasonryList products={usables} refreshing={loading} />
+          <HomeProductList products={usables} />
         </Block>
-        {/* <Pressable onPress={ 
-          goToSearch
-          } style={styles.camBtn}>
-          <FontAwesome name="camera" size={24} color="grey" />
-        </Pressable> */}
       </ScrollView>
     </Block>
   );

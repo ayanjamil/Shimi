@@ -6,15 +6,14 @@ import {
   View,
 } from "react-native";
 
-import Product from "./Product";
 
 const MasonryList = ({
   products,
   refreshing = false,
+  ItemComponent,
+  numColumns = 2,
   onRefresh = () => {},
 }) => {
-  const width = useWindowDimensions().width;
-  const numColumns = Math.ceil(width / 350);
   return (
     <ScrollView
       contentContainerStyle={{ width: "100%" }}
@@ -27,8 +26,8 @@ const MasonryList = ({
           <View style={styles.column} key={`column_${colIndex}`}>
             {products
               .filter((_, index) => index % numColumns === colIndex)
-              .map((product) => (
-                <Product product={product} key={product.id} />
+              .map((product, index) => (
+                <ItemComponent product={product} key={index} />
               ))}
           </View>
         ))}

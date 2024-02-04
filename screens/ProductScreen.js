@@ -81,9 +81,9 @@ const ProductScreen = () => {
         <ProductRecomList products={usables} />
       </View>
       {/* Navigation icon */}
-      {/* <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>
+      <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>
         <Ionicons name={"chevron-back"} size={35} color={"black"} />
-      </Pressable> */}
+      </Pressable>
     </ScrollView>
   );
 };

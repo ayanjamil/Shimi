@@ -22,7 +22,7 @@ import SearchProduct from "../components/SearchProduct";
 import SearchRecomList from "../components/SearchRecomList";
 import mockSearchResult from "../constants/mockSearchResults";
 import { generateUniqueImageName } from "../constants/utils";
-import { SEARCH_API_BASEURL } from "@env";
+import { getSearchApiUploadUrl } from "../api/url";
 
 const SearchScreen = (props) => {
   const [uploading, setUploading] = useState(false);
@@ -36,6 +36,7 @@ const SearchScreen = (props) => {
 
   const uploadImage = useCallback(async (uri) => {
     setUploading(true);
+    const url= getSearchApiUploadUrl();
     const imageName = generateUniqueImageName();
     const formData = new FormData();
     formData.append("image", {
@@ -44,7 +45,6 @@ const SearchScreen = (props) => {
       type: "image/jpeg",
     });
     formData.append("type", "search");
-
     try {
       const response = await fetch(SEARCH_API_BASEURL + "api/search_image", {
         method: "POST",

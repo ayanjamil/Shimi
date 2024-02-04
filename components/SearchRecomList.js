@@ -9,45 +9,15 @@ import {
 } from "react-native";
 
 import SearchRecomCard from "./SearchRecomCard";
+import MasonryList from "./MasonryList";
 
 const SearchRecomList = ({
   products,
-  refreshing = false,
-  onRefresh = () => {},
 }) => {
-  const width = useWindowDimensions().width;
-  const numColumns = Math.ceil(width / 150);
 
   return (
-    <ScrollView
-      contentContainerStyle={{ width: "100%" }}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      <View style={styles.container}>
-        {Array.from(Array(numColumns)).map((_, colIndex) => (
-          <View style={styles.column} key={`column_${colIndex}`}>
-            {products
-              .filter((_, index) => index % numColumns === colIndex)
-              .map((product) => (
-                <SearchRecomCard product={product} key={product.position} />
-              ))}
-          </View>
-        ))}
-      </View>
-    </ScrollView>
+    <MasonryList products={products} ItemComponent={SearchRecomCard} numColumns={3}></MasonryList>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    flexDirection: "row",
-  },
-  column: {
-    flex: 1,
-  },
-});
 
 export default SearchRecomList;
