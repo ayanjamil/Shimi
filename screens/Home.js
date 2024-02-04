@@ -17,7 +17,7 @@ import usables from "../constants/usables";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import ImageUploadComponent from "../components/ImageUploadBtn";
-import HomeProductList from "../components/HomeProductList";
+import Product from "../components/Product";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -56,7 +56,11 @@ const Home = () => {
 
         {/* masonry layout */}
         <Block flex>
-          <HomeProductList products={usables} />
+          <MasonryList
+            items={usables}
+            ItemComponent={Product}
+            numColumns={2}
+          />
         </Block>
       </ScrollView>
     </Block>

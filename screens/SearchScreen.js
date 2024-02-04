@@ -19,10 +19,12 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import SearchProduct from "../components/SearchProduct";
-import SearchRecomList from "../components/SearchRecomList";
+import SearchRecomCard from "../components/SearchRecomCard";
+import MasonryList from "../components/MasonryList";
 import mockSearchResult from "../constants/mockSearchResults";
 import { generateUniqueImageName } from "../constants/utils";
 import { getSearchApiUploadUrl } from "../api/url";
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const SearchScreen = (props) => {
   const [uploading, setUploading] = useState(false);
@@ -36,8 +38,9 @@ const SearchScreen = (props) => {
 
   const uploadImage = useCallback(async (uri) => {
     setUploading(true);
-    const url= getSearchApiUploadUrl();
+    const url = getSearchApiUploadUrl();
     const imageName = generateUniqueImageName();
+    const SEARCH_API_UPLOADURL = getSearchApiUploadUrl();
     const formData = new FormData();
     formData.append("image", {
       uri: uri,
@@ -46,7 +49,7 @@ const SearchScreen = (props) => {
     });
     formData.append("type", "search");
     try {
-      const response = await fetch(SEARCH_API_BASEURL + "api/search_image", {
+      const response = await fetch(SEARCH_API_UPLOADURL, {
         method: "POST",
         body: formData,
       });
@@ -86,7 +89,11 @@ const SearchScreen = (props) => {
           Search results
         </Text>
         {!uploading && searchResult ? (
-          <SearchRecomList products={searchResult} />
+          <MasonryList
+            items={searchResult}
+            ItemComponent={SearchRecomCard}
+            numColumns={3}
+          />
         ) : (
           <ActivityIndicator size="large" color="black" />
         )}

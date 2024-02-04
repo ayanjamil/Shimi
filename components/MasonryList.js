@@ -8,7 +8,7 @@ import {
 
 
 const MasonryList = ({
-  products,
+  items,
   refreshing = false,
   ItemComponent,
   numColumns = 2,
@@ -24,10 +24,10 @@ const MasonryList = ({
       <View style={styles.container}>
         {Array.from(Array(numColumns)).map((_, colIndex) => (
           <View style={styles.column} key={`column_${colIndex}`}>
-            {products
+            {items
               .filter((_, index) => index % numColumns === colIndex)
-              .map((product, index) => (
-                <ItemComponent product={product} key={index} />
+              .map((item, index) => (
+                <ItemComponent product={item} key={index} />
               ))}
           </View>
         ))}
