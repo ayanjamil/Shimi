@@ -40,7 +40,6 @@ const SearchScreen = (props) => {
     setUploading(true);
     const url = getSearchApiUploadUrl();
     const imageName = generateUniqueImageName();
-    const SEARCH_API_UPLOADURL = getSearchApiUploadUrl();
     const formData = new FormData();
     formData.append("image", {
       uri: uri,
@@ -49,7 +48,7 @@ const SearchScreen = (props) => {
     });
     formData.append("type", "search");
     try {
-      const response = await fetch(SEARCH_API_UPLOADURL, {
+      const response = await fetch(url, {
         method: "POST",
         body: formData,
       });
