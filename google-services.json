@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "904122348831",
+    "project_id": "shimi-1c1e8",
+    "storage_bucket": "shimi-1c1e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904122348831:android:796823160dbd40a4002c2a",
+        "android_client_info": {
+          "package_name": "com.a_yan.argonfreereactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904122348831-7qgj75kk9cu8dkthmfu7jgaimk516ktd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_yan.argonfreereactnative",
+            "certificate_hash": "823314df111d030ee4ac8081a34e2e5d0ec03bbf"
+          }
+        },
+        {
+          "client_id": "904122348831-la5ui96nkmmna7gvfhj5qa9ncjgq39j8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_yan.argonfreereactnative",
+            "certificate_hash": "bd4e3176cf3e82f1dc09bae8b7ec531c1ea4d3d8"
+          }
+        },
+        {
+          "client_id": "904122348831-nr8akrbkhq4skln41ulo7jlmik52aesh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByLlvIrQmY9ld2bsMskuhbNOVAGtX_4Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904122348831-nr8akrbkhq4skln41ulo7jlmik52aesh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
