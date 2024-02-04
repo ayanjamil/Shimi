@@ -12,12 +12,34 @@ const { height, width } = Dimensions.get("screen");
 import Images from "../constants/Images";
 import { useNavigation } from "@react-navigation/native";
 
+import "expo-dev-client";
+
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+// import { GoogleSignin } from "@react-native-google-signin/google-signin";
+
+import auth from "@react-native-firebase/auth";
+// import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const Onboarding = (props) => {
   const navigation = useNavigation();
 
-  const auth = getAuth();
+  // const auth = getAuth();
+  // GoogleSignin.configure({
+  //   webClientId:
+  //     "904122348831-nr8akrbkhq4skln41ulo7jlmik52aesh.apps.googleusercontent.com",
+  // });
+  // async function onGoogleButtonPress() {
+  //   // Check if your device supports Google Play
+  //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+  //   // Get the users ID token
+  //   const { idToken } = await GoogleSignin.signIn();
+
+  //   // Create a Google credential with the token
+  //   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  //   // Sign-in the user with the credential
+  //   return auth().signInWithCredential(googleCredential);
+  // }
 
   const handleAuth = async () => {
     const provider = new GoogleAuthProvider();
@@ -110,7 +132,7 @@ const Onboarding = (props) => {
 
               borderRadius: 25,
             }}
-            onPress={() => handleAuth}
+            onPress={() => onGoogleButtonPress()}
           >
             <Text center bold style={styles.text}>
               Continue with Google

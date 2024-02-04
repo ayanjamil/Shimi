@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import { Block, GalioProvider } from "galio-framework";
 import { NavigationContainer } from "@react-navigation/native";
+import "expo-dev-client";
 
 // Before rendering any navigation stack
 import { enableScreens } from "react-native-screens";
