@@ -15,7 +15,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import usables from "../constants/usables";
 import ProductCard from "../components/ProductCard";
-import ProductRecomList from "../components/ProductRecomList";
+import ProductRecomCard from "../components/ProductRecomCard";
+import MasonryList from "../components/MasonryList";
 
 const ProductScreen = () => {
   const [product, setProduct] = useState(null);
@@ -25,15 +26,10 @@ const ProductScreen = () => {
 
   const productId = route.params?.id;
 
-  const fetchProduct = useCallback(
-    (productId) => {
-      const fetchedProduct = usables.find(
-        (product) => product.id === productId
-      );
-      setProduct(fetchedProduct);
-    },
-    [setProduct]
-  );
+  const fetchProduct = useCallback((productId) => {
+    const fetchedProduct = usables.find((product) => product.id === productId);
+    setProduct(fetchedProduct);
+  }, []);
 
   useEffect(() => {
     fetchProduct(productId);
@@ -83,9 +79,13 @@ const ProductScreen = () => {
         <Text style={styles.title} numberOfLines={2}>
           {!!product && product.title}
         </Text>
-        <ProductRecomList products={usables} />
+        <MasonryList
+          items={usables}
+          ItemComponent={ProductRecomCard}
+          numColumns={3}
+        />
       </View>
-
+      {/* Navigation icon */}
       <Pressable onPress={goBack} style={[styles.backBtn, { top: 20 }]}>
         <Ionicons name={"chevron-back"} size={35} color={"black"} />
       </Pressable>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     left: 10,
   },
   exploreMore: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   title: {
     fontSize: 22,
