@@ -212,8 +212,9 @@ function HomeStack(props) {
     </Stack.Navigator>
   );
 }
+//for this to work add export default to start from Onboarding stack
 
-export default function OnboardingStack(props) {
+function OnboardingStack(props) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -285,7 +286,7 @@ export default function OnboardingStack(props) {
 }
 
 // bottom tab navigation
-function AppStack(props) {
+export default function AppStack(props) {
   return (
     <BottomTab.Navigator
       tabBarOptions={{
