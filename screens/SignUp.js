@@ -14,66 +14,15 @@ const { height, width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth, db } from "../config/firebase";
+import { auth, db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
-
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import Constants from "expo-constants";
-const firebaseConfig = {
-  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
-  authDomain: "shimi-1c1e8.firebaseapp.com",
-  projectId: "shimi-1c1e8",
-  storageBucket: "shimi-1c1e8.appspot.com",
-  messagingSenderId: "904122348831",
-  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
-  measurementId: "G-C56NV5V0ZZ",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const db = getFirestore();
-// export { app };
-// export const db = getFirestore(initializeApp(firebaseConfig));
 
 const SignUp = (props) => {
   const navigation = useNavigation();
-  const [name, setName] = useState("ayan");
-  const [email, setEmail] = useState("ayanjamil00@gmail.com");
-  const [phone, setPhone] = useState("9934719916");
-  const [password, setPassword] = useState("ayan@123");
-
-  // const addDataToDatabase = async () => {
-  //   console.log("addDataToDatabase called");
-  //   const userCollection = collection(db, "users");
-  //   try {
-  //     const docRef = await addDoc(userCollection, {
-  //       first: "Ada",
-  //       last: "Lovelace",
-  //       born: 1815,
-  //     });
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // };
-
-  // const addDataToDatabase = async () => {
-  //   console.log("addDataToDatabase called");
-  //   const userCollection = collection(db, "users");
-  //   try {
-  //     const docRef = await addDoc(userCollection, {
-  //       first: "Ada",
-  //       last: "Lovelace",
-  //       born: 1815,
-  //     });
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
 
   const onHandleSignup = async () => {
     try {
@@ -83,21 +32,17 @@ const SignUp = (props) => {
         password
       );
       const user = userCredential.user;
-      // const userRef = doc(database, "users", user.uid);
-      // await setDoc(userRef, {
-      //   displayName: name,
-      //   email: email,
-      //   uid: user.uid,
-      //   photoURL: imageURL || profile,
-      //   phoneNumber: "",
-      // });
-      //  adding phonenumber and name to database(would have to enable firestore)
+      const userCollection = collection(db, "users");
+      const docRef = await addDoc(userCollection, {
+        name: name,
+        email: email,
+        phone: phone,
+      });
+      console.log("Document written with ID: ", docRef.id);
       console.log(user.email);
       navigation.navigate("App");
-      //can use State Management to make it better
     } catch (error) {
-      Alert.alert(error.message);
-      console.log(Alert.alert(error.message));
+      console.log(error);
     }
   };
   return (
@@ -202,7 +147,9 @@ const SignUp = (props) => {
               paddingVertical: 15,
               borderRadius: 10,
             }}
-            onPress={onHandleSignup}
+            onPress={() => {
+              onHandleSignup();
+            }}
           >
             <Text color="white" center bold style={styles.text}>
               Sign Up
