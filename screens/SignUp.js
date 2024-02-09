@@ -14,7 +14,29 @@ const { height, width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, database } from "../config/firebase";
+// import { auth, db } from "../config/firebase";
+import { collection, addDoc } from "firebase/firestore";
+
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import Constants from "expo-constants";
+const firebaseConfig = {
+  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
+  authDomain: "shimi-1c1e8.firebaseapp.com",
+  projectId: "shimi-1c1e8",
+  storageBucket: "shimi-1c1e8.appspot.com",
+  messagingSenderId: "904122348831",
+  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
+  measurementId: "G-C56NV5V0ZZ",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
+// export { app };
+// export const db = getFirestore(initializeApp(firebaseConfig));
 
 const SignUp = (props) => {
   const navigation = useNavigation();
@@ -22,6 +44,21 @@ const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+
+  const addDataToDatabase = async () => {
+    console.log("addDataToDatabase called");
+    const userCollection = collection(db, "users");
+    try {
+      const docRef = await addDoc(userCollection, {
+        first: "Ada",
+        last: "Lovelace",
+        born: 1815,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   const onHandleSignup = async () => {
     try {
@@ -55,7 +92,7 @@ const SignUp = (props) => {
       </Text>
       <Block flex style={{ flex: 1 }}>
         <Block style={styles.blocks}>
-          {/* <Block style={{}}>
+          <Block style={{}}>
             <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
               Full Name
             </Text>
@@ -75,7 +112,7 @@ const SignUp = (props) => {
                 />
               }
             />
-          </Block> */}
+          </Block>
 
           <Block style={{}}>
             <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
@@ -98,7 +135,7 @@ const SignUp = (props) => {
               }
             />
           </Block>
-          {/* <Block style={{}}>
+          <Block style={{}}>
             <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
               Phone
             </Text>
@@ -118,7 +155,7 @@ const SignUp = (props) => {
                 />
               }
             />
-          </Block> */}
+          </Block>
 
           <Block style={{}}>
             <Text size={18} color="#888888" style={{ marginHorizontal: 2 }}>
@@ -185,7 +222,7 @@ const SignUp = (props) => {
                 paddingVertical: 15,
                 borderRadius: 10,
               }}
-              onPress={() => console.log("Sign up with Google Pressed")}
+              onPress={() => addDataToDatabase()}
             >
               <Text color="black" center bold style={styles.text}>
                 Sign up with Google
@@ -193,31 +230,31 @@ const SignUp = (props) => {
             </TouchableOpacity>
           </Block>
         </Block>
-      </Block>
-      <Block
-        flex
-        center
-        style={{
-          flexDirection: "row",
-          marginTop: 10,
-          alignItems: "flex-end",
-          marginVertical: 20,
-        }}
-      >
-        <Text style={{ fontSize: 16 }}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
-          <Text
-            center
-            style={{
-              color: "blue",
-              alignSelf: "center",
-              marginHorizontal: 5,
-              fontSize: 16,
-            }}
-          >
-            Login
-          </Text>
-        </TouchableOpacity>
+        <Block
+          flex
+          center
+          style={{
+            flexDirection: "row",
+            marginTop: 10,
+            alignItems: "flex-end",
+            marginVertical: 20,
+          }}
+        >
+          <Text style={{ fontSize: 16 }}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+            <Text
+              center
+              style={{
+                color: "blue",
+                alignSelf: "center",
+                marginHorizontal: 5,
+                fontSize: 16,
+              }}
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
+        </Block>
       </Block>
     </Block>
   );

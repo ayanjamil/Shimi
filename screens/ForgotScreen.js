@@ -15,7 +15,27 @@ import { argonTheme, tabs } from "../constants";
 const { height, width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../config/firebase";
+// import { auth } from "../config/firebase";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import Constants from "expo-constants";
+const firebaseConfig = {
+  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
+  authDomain: "shimi-1c1e8.firebaseapp.com",
+  projectId: "shimi-1c1e8",
+  storageBucket: "shimi-1c1e8.appspot.com",
+  messagingSenderId: "904122348831",
+  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
+  measurementId: "G-C56NV5V0ZZ",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
+// export { app };
+// export const db = getFirestore(initializeApp(firebaseConfig));
 
 const forgotPassword = async (Email) => {
   try {
@@ -32,7 +52,7 @@ const ForgotScreen = (props) => {
   return (
     <Block flex style={{ backgroundColor: "white", flex: 1 }}>
       <Text center size={35} bold style={{ marginVertical: 40 }}>
-        Forgot Screen
+        Forgot Password
       </Text>
       <Block flex style={{ flex: 1 }}>
         <Block style={styles.blocks}>
