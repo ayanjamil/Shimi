@@ -40,10 +40,25 @@ const db = getFirestore();
 
 const SignUp = (props) => {
   const navigation = useNavigation();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("ayan");
+  const [email, setEmail] = useState("ayanjamil00@gmail.com");
+  const [phone, setPhone] = useState("9934719916");
+  const [password, setPassword] = useState("ayan@123");
+
+  // const addDataToDatabase = async () => {
+  //   console.log("addDataToDatabase called");
+  //   const userCollection = collection(db, "users");
+  //   try {
+  //     const docRef = await addDoc(userCollection, {
+  //       first: "Ada",
+  //       last: "Lovelace",
+  //       born: 1815,
+  //     });
+  //     console.log("Document written with ID: ", docRef.id);
+  //   } catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+  };
 
   const addDataToDatabase = async () => {
     console.log("addDataToDatabase called");
