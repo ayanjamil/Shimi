@@ -58,22 +58,22 @@ const SignUp = (props) => {
   //   } catch (e) {
   //     console.error("Error adding document: ", e);
   //   }
-  };
+  // };
 
-  const addDataToDatabase = async () => {
-    console.log("addDataToDatabase called");
-    const userCollection = collection(db, "users");
-    try {
-      const docRef = await addDoc(userCollection, {
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+  // const addDataToDatabase = async () => {
+  //   console.log("addDataToDatabase called");
+  //   const userCollection = collection(db, "users");
+  //   try {
+  //     const docRef = await addDoc(userCollection, {
+  //       first: "Ada",
+  //       last: "Lovelace",
+  //       born: 1815,
+  //     });
+  //     console.log("Document written with ID: ", docRef.id);
+  //   } catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+  // };
 
   const onHandleSignup = async () => {
     try {
