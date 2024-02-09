@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -16,18 +16,15 @@ import usables from "../constants/usables";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import ImageUploadComponent from "../components/ImageUploadBtn";
+import Product from "../components/Product";
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 const loading = false;
 
-const Home = (props) => {
-  const navigation = useNavigation();
-  const goToSearch = () => {
-    navigation.navigate("Search");
-  };
-
+const Home = () => {
   return (
     <Block flex style={styles.homeContainer}>
       <ScrollView style={{ width, marginTop: "20%" }}>
@@ -39,7 +36,6 @@ const Home = (props) => {
               style={{ marginBottom: 30 }}
             />
           </Block>
-
           {/* search bar */}
           <Block flex>
             <Input
@@ -54,18 +50,18 @@ const Home = (props) => {
                 />
               }
             />
+            <ImageUploadComponent />
           </Block>
         </Block>
 
         {/* masonry layout */}
         <Block flex>
-          <MasonryList products={usables} refreshing={loading} />
+          <MasonryList
+            items={usables}
+            ItemComponent={Product}
+            numColumns={2}
+          />
         </Block>
-        {/* <Pressable onPress={ 
-          goToSearch
-          } style={styles.camBtn}>
-          <FontAwesome name="camera" size={24} color="grey" />
-        </Pressable> */}
       </ScrollView>
     </Block>
   );
