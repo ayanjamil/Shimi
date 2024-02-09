@@ -39,7 +39,6 @@ const SignUp = (props) => {
         phone: phone,
       });
       console.log("Document written with ID: ", docRef.id);
-      console.log(user.email);
       navigation.navigate("App");
     } catch (error) {
       console.log(error);

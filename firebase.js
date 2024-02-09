@@ -1,21 +1,25 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import Constants from "expo-constants";
+import {
+  FIREBASE_APIKEY,
+  FIREBASE_AUTHDOMAIN,
+  FIREBASE_PROJECTID,
+  FIREBASE_STORAGEBUCKET,
+  FIREBASE_MESSAGINGSENDERID,
+  FIREBASE_APPID,
+  FIREBASE_MEASUREMENTID,
+} from "@env";
 const firebaseConfig = {
-  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
-  authDomain: "shimi-1c1e8.firebaseapp.com",
-  projectId: "shimi-1c1e8",
-  storageBucket: "shimi-1c1e8.appspot.com",
-  messagingSenderId: "904122348831",
-  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
-  measurementId: "G-C56NV5V0ZZ",
+  apiKey: FIREBASE_APIKEY,
+  authDomain: FIREBASE_AUTHDOMAIN,
+  projectId: FIREBASE_PROJECTID,
+  storageBucket: FIREBASE_STORAGEBUCKET,
+  messagingSenderId: FIREBASE_MESSAGINGSENDERID,
+  appId: FIREBASE_APPID,
+  measurementId: FIREBASE_MEASUREMENTID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore(app);
-
-// export { app };
-// export const db = getFirestore(initializeApp(firebaseConfig));

@@ -16,50 +16,12 @@ const { height, width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-// import { auth } from "../config/firebase";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import Constants from "expo-constants";
-const firebaseConfig = {
-  apiKey: "AIzaSyCrcLMbeWfPvHwAfGMtNDM8NonUH5l4yGY",
-  authDomain: "shimi-1c1e8.firebaseapp.com",
-  projectId: "shimi-1c1e8",
-  storageBucket: "shimi-1c1e8.appspot.com",
-  messagingSenderId: "904122348831",
-  appId: "1:904122348831:web:215dc6b0f0a5104a002c2a",
-  measurementId: "G-C56NV5V0ZZ",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const db = getFirestore();
-// export { app };
-// export const db = getFirestore(initializeApp(firebaseConfig));
+import { auth } from "../config/firebase";
 
 const SignIn = (props) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const checkUser = async (user) => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        console.log(uid);
-        navigation.navigate("App");
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        console.log("user not defined");
-      }
-    });
-  };
-
   const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
       try {
@@ -69,9 +31,7 @@ const SignIn = (props) => {
           password
         );
         const user = userCredential.user;
-        console.log(user.email);
-        checkUser(user);
-        // navigation.navigate("App");
+        navigation.navigate("App");
       } catch (err) {
         console.log(err);
       }
