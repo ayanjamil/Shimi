@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   ImageBackground,
   Image,
@@ -17,8 +17,10 @@ import { useNavigation } from "@react-navigation/native";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { AuthContext } from "../context/AuthContext";
 
 const SignIn = (props) => {
+  const { authFinish } = useContext(AuthContext);
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +33,8 @@ const SignIn = (props) => {
           password
         );
         const user = userCredential.user;
-        navigation.navigate("App");
+        const userUid = user.uid;
+        authFinish(userUid);
       } catch (err) {
         console.log(err);
       }

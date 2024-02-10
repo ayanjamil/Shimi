@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ImageBackground,
   Image,
@@ -13,12 +13,12 @@ import Images from "../constants/Images";
 import { useNavigation } from "@react-navigation/native";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../context/AuthContext";
 
 const Onboarding = (props) => {
   const navigation = useNavigation();
 
   const auth = getAuth();
-
   const handleAuth = async () => {
     const provider = new GoogleAuthProvider();
     try {

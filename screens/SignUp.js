@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -17,12 +17,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
+import { AuthContext } from "../context/AuthContext";
+
 const SignUp = (props) => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const { authFinish } = useContext(AuthContext);
 
   const onHandleSignup = async () => {
     try {
@@ -32,6 +35,8 @@ const SignUp = (props) => {
         password
       );
       const user = userCredential.user;
+      const userUid = user.uid;
+
       const userCollection = collection(db, "users");
       const docRef = await addDoc(userCollection, {
         name: name,
@@ -39,7 +44,7 @@ const SignUp = (props) => {
         phone: phone,
       });
       console.log("Document written with ID: ", docRef.id);
-      navigation.navigate("App");
+      authFinish(userUid);
     } catch (error) {
       console.log(error);
     }

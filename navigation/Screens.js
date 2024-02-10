@@ -158,6 +158,7 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen name="App" component={AppStack} />
       <Stack.Screen
         name="ProductScreen"
         component={ProductScreen}
@@ -213,79 +214,76 @@ function HomeStack(props) {
   );
 }
 
-export default function OnboardingStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Onboarding"
-        component={Onboarding}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen name="App" component={AppStack} />
-      <Stack.Screen
-        name="SignIn"
-        component={SignIn}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="ForgotScreen"
-        component={ForgotScreen}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
+// function OnboardingStack(props) {
+//   return (
+//     <Stack.Navigator
+//       screenOptions={{
+//         mode: "card",
+//         headerShown: false,
+//       }}
+//     >
+//       <Stack.Screen
+//         name="Onboarding"
+//         component={Onboarding}
+//         option={{
+//           headerTransparent: true,
+//         }}
+//       />
+//       <Stack.Screen name="App" component={AppStack} />
+//       <Stack.Screen
+//         name="SignIn"
+//         component={SignIn}
+//         options={{
+//           header: ({ navigation, scene }) => (
+//             <Header
+//               title=""
+//               white
+//               transparent
+//               navigation={navigation}
+//               scene={scene}
+//             />
+//           ),
+//           headerTransparent: true,
+//         }}
+//       />
+//       <Stack.Screen
+//         name="SignUp"
+//         component={SignUp}
+//         options={{
+//           header: ({ navigation, scene }) => (
+//             <Header
+//               title=""
+//               white
+//               transparent
+//               navigation={navigation}
+//               scene={scene}
+//             />
+//           ),
+//           headerTransparent: true,
+//         }}
+//       />
+//       <Stack.Screen
+//         name="ForgotScreen"
+//         component={ForgotScreen}
+//         options={{
+//           header: ({ navigation, scene }) => (
+//             <Header
+//               title=""
+//               white
+//               transparent
+//               navigation={navigation}
+//               scene={scene}
+//             />
+//           ),
+//           headerTransparent: true,
+//         }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
 
 // bottom tab navigation
-function AppStack(props) {
+export default function AppStack(props) {
   return (
     <BottomTab.Navigator
       tabBarOptions={{

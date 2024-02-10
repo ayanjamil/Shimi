@@ -56,11 +56,7 @@ const Home = () => {
 
         {/* masonry layout */}
         <Block flex>
-          <MasonryList
-            items={usables}
-            ItemComponent={Product}
-            numColumns={2}
-          />
+          <MasonryList items={usables} ItemComponent={Product} numColumns={2} />
         </Block>
       </ScrollView>
     </Block>

@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Image } from "react-native";
+import React, { useCallback, useEffect, useState, useContext } from "react";
+import { Image, View, ActivityIndicator } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
@@ -12,7 +12,10 @@ enableScreens();
 
 // see Screens.js for navigation container setup
 import Screens from "./navigation/Screens";
+import AuthStack from "./navigation/AuthStack";
 import { Images, articles, argonTheme } from "./constants";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
+import AppNav from "./navigation/AppNav";
 
 // cache app images
 const assetImages = [
@@ -74,12 +77,8 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer onReady={onLayoutRootView}>
-      <GalioProvider theme={argonTheme}>
-        <Block flex>
-          <Screens />
-        </Block>
-      </GalioProvider>
-    </NavigationContainer>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
   );
 }
