@@ -170,31 +170,6 @@ const SignUp = (props) => {
           >
             Forgot Password?
           </Text>
-          <View style={styles.containerDivider}>
-            <View style={styles.line} />
-            <Text style={styles.textDivider}>OR</Text>
-            <View style={styles.line} />
-          </View>
-          <Block
-            style={{
-              borderWidth: 2,
-              borderColor: "#C0C0C0",
-              borderRadius: 10,
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                backgroundColor: "#FFFFFF",
-                paddingVertical: 15,
-                borderRadius: 10,
-              }}
-              onPress={() => addDataToDatabase()}
-            >
-              <Text color="black" center bold style={styles.text}>
-                Sign up with Google
-              </Text>
-            </TouchableOpacity>
-          </Block>
         </Block>
         <Block
           flex
