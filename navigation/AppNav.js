@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState, useContext } from "react";
 import { Image, View, ActivityIndicator } from "react-native";
 import { Block, GalioProvider } from "galio-framework";
 import { NavigationContainer } from "@react-navigation/native";
-import { enableScreens } from "react-native-screens";
-enableScreens();
+
 import Screens from "./Screens";
 import AuthStack from "./AuthStack";
 import { argonTheme } from "../constants";

@@ -22,7 +22,6 @@ const Onboarding = (props) => {
   const handleAuth = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      console.log("entered try block");
       const result = await signInWithPopup(auth, provider);
       if (result) {
         const user = result.user;

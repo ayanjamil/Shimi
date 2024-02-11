@@ -78,6 +78,7 @@ const SignIn = (props) => {
               title="Full Name"
               placeholder=""
               shadowless
+              secureTextEntry={true}
               value={password}
               onChangeText={(password) => setPassword(password)}
               iconContent={

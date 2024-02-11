@@ -83,7 +83,7 @@ const SignUp = (props) => {
               Email
             </Text>
             <Input
-              title="Full Name"
+              title="email"
               placeholder=""
               shadowless
               value={email}
@@ -104,7 +104,7 @@ const SignUp = (props) => {
               Phone
             </Text>
             <Input
-              title="Full Name"
+              title="phone"
               placeholder=""
               shadowless
               value={phone}
@@ -126,7 +126,7 @@ const SignUp = (props) => {
               Password
             </Text>
             <Input
-              title="Full Name"
+              title="password"
               placeholder=""
               shadowless
               secureTextEntry={true}
