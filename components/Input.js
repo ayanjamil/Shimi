@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import { Input } from "galio-framework";
 
-import Icon from './Icon';
+import Icon from "./Icon";
 import { argonTheme } from "../constants";
 
 class ArInput extends React.Component {
@@ -16,7 +16,7 @@ class ArInput extends React.Component {
       !shadowless && styles.shadow,
       success && styles.success,
       error && styles.error,
-      {...this.props.style}
+      { ...this.props.style },
     ];
 
     return (
@@ -42,21 +42,21 @@ class ArInput extends React.Component {
 ArInput.defaultProps = {
   shadowless: false,
   success: false,
-  error: false
+  error: false,
 };
 
 ArInput.propTypes = {
   shadowless: PropTypes.bool,
   success: PropTypes.bool,
-  error: PropTypes.bool
-}
+  error: PropTypes.bool,
+};
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: 30,
-    borderColor: "#F1F1F1",
+    borderRadius: 10,
+    borderColor: "#C0C0C0",
     height: 48,
-    backgroundColor: "#F1F1F1",
+    backgroundColor: "white",
   },
   success: {
     borderColor: argonTheme.COLORS.INPUT_SUCCESS,

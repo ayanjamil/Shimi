@@ -17,6 +17,9 @@ import Register from "../screens/Register";
 import Wishlist from "../screens/WishList";
 import ProductScreen from "../screens/ProductScreen";
 import SearchScreen from "../screens/SearchScreen";
+import SignIn from "../screens/SignIn";
+import SignUp from "../screens/SignUp";
+import ForgotScreen from "../screens/ForgotScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -155,6 +158,7 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen name="App" component={AppStack} />
       <Stack.Screen
         name="ProductScreen"
         component={ProductScreen}
@@ -210,28 +214,8 @@ function HomeStack(props) {
   );
 }
 
-export default function OnboardingStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Onboarding"
-        component={Onboarding}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen name="App" component={AppStack} />
-    </Stack.Navigator>
-  );
-}
-
 // bottom tab navigation
-function AppStack(props) {
+export default function AppStack(props) {
   return (
     <BottomTab.Navigator
       tabBarOptions={{
