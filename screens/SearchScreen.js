@@ -52,21 +52,23 @@ const SearchScreen = (props) => {
         method: "POST",
         body: formData,
       });
+      if (!response) throw "fetch error";
+
       const searchResultsData = await response.json();
+      if (!searchResultsData) throw "search results error";
 
       if (!!searchResultsData?.response?.visual_matches) {
         const filteredResult =
           searchResultsData?.response?.visual_matches.filter(
             (product) => product.price
           );
+        if (!filteredResult) throw "filter array error";
         setSearchResult(filteredResult);
       } else setSearchResult(mockSearchResult);
     } catch (error) {
       //Alert user and go back to home screen
-      Alert.alert(
-        "Error",
-        "We're unable to search for this right now :( \nPlease try again later"
-      );
+      Alert.alert("Error", error);
+      console.log(error);
       navigation.goBack();
     } finally {
       setUploading(false);
