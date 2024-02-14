@@ -22,8 +22,8 @@ import { AuthContext } from "../context/AuthContext";
 const SignIn = (props) => {
   const { authFinish } = useContext(AuthContext);
   const navigation = useNavigation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("ayanjamil00@gmail.com");
+  const [password, setPassword] = useState("ayan@123");
   const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
       try {

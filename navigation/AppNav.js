@@ -9,6 +9,9 @@ import { argonTheme } from "../constants";
 import { AuthContext } from "../context/AuthContext";
 const AppNav = () => {
   const { isLoading, userToken } = useContext(AuthContext);
+  console.log(`inside of app nav ${userToken}`);
+
+  //userUid is passed as userToken in AuthContext
   if (isLoading) {
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ActivityIndicator size={"large "} />
