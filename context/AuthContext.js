@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const value = await AsyncStorage.getItem("userToken");
       if (value !== null) {
-        console.log(value);
         return value;
       }
     } catch (error) {
@@ -30,8 +29,6 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  console.log(`inside of AuthContext ${userToken}`);
-
   const logout = () => {
     setUserToken(null);
     setIsLoading(false);
@@ -40,7 +37,6 @@ export const AuthProvider = ({ children }) => {
   const storeUserToken = async (userUid) => {
     try {
       await AsyncStorage.setItem("userToken", userUid);
-      console.log(`inside of storeuserToken ${userUid}`);
     } catch (error) {
       console.error(error);
     }
