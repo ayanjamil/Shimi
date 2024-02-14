@@ -20,27 +20,25 @@ const { width } = Dimensions.get("screen");
 
 const Home = () => {
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const url = getExploreApiUrl();
-  const getData = useCallback(async (feedDataURL) => {
+  const [loading, setLoading] = useState(true);
+
+  const getData = useCallback(async () => {
+    const url = getExploreApiUrl();
     setLoading(true);
     try {
-      const response = await fetch(feedDataURL);
+      const response = await fetch(url);
       const searchResultsData = await response.json();
       setResult(searchResultsData.data);
     } catch (error) {
-      Alert.alert(
-        "Error",
-        "We're unable to fetch data right now. Please try again later."
-      );
+      Alert.alert("Sorry we couldn't find anything for you at the moment :((");
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    getData(url);
-  }, [url]);
+    getData();
+  }, []);
 
   return (
     <Block flex style={styles.homeContainer}>
