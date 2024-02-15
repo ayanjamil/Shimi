@@ -23,7 +23,7 @@ const SignIn = (props) => {
   const { authFinish } = useContext(AuthContext);
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("ayan@123");
+  const [password, setPassword] = useState("");
   const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
       try {
