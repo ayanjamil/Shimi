@@ -5,11 +5,11 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
 
-  const authFinish = (userUid) => {
+  const authFinish = useCallback((userUid) => {
     setUserToken(userUid);
     setIsLoading(false);
     storeUserToken(userUid);
-  };
+  }, []);
 
   const retrieveData = useCallback(async () => {
     try {
@@ -23,17 +23,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await retrieveData();
-    };
-    fetchData();
+    retrieveData();
   }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUserToken(null);
     setIsLoading(false);
     removeData("userToken");
-  };
+  }, []);
 
   const storeUserToken = useCallback(async (userUid) => {
     try {
@@ -42,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
     }
   }, []);
+
   const removeData = useCallback(async (key) => {
     try {
       await AsyncStorage.removeItem(key);
