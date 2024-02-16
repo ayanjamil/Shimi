@@ -5,26 +5,41 @@ import {
   Image,
   ScrollView,
   Platform,
-  Pressable,
+  ActivityIndicator,
 } from "react-native";
-import { Block, Text, theme } from "galio-framework";
-
+import { Block, theme } from "galio-framework";
 import { Input } from "../components";
 import MasonryList from "../components/MasonryList";
 import { HeaderHeight } from "../constants/utils";
-import usables from "../constants/usables";
-
 import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import ImageUploadComponent from "../components/ImageUploadBtn";
 import Product from "../components/Product";
+import { getExploreApiUrl } from "../api/url";
 
-const { width, height } = Dimensions.get("screen");
-
-const thumbMeasure = (width - 48 - 32) / 3;
-const loading = false;
+const { width } = Dimensions.get("screen");
 
 const Home = () => {
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const getData = useCallback(async () => {
+    const url = getExploreApiUrl();
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      const searchResultsData = await response.json();
+      setResult(searchResultsData.data);
+    } catch (error) {
+      Alert.alert("Sorry we couldn't find anything for you at the moment :((");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Block flex style={styles.homeContainer}>
       <ScrollView style={{ width, marginTop: "20%" }}>
@@ -53,11 +68,21 @@ const Home = () => {
             <ImageUploadComponent />
           </Block>
         </Block>
-
-        {/* masonry layout */}
-        <Block flex>
-          <MasonryList items={usables} ItemComponent={Product} numColumns={2} />
-        </Block>
+        {!loading && result ? (
+          <Block flex>
+            <MasonryList
+              items={result}
+              ItemComponent={Product}
+              numColumns={2}
+            />
+          </Block>
+        ) : (
+          <ActivityIndicator
+            center
+            size="large"
+            color="black"
+          ></ActivityIndicator>
+        )}
       </ScrollView>
     </Block>
   );

@@ -14,8 +14,8 @@ const { height, width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { auth, db } from "../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -27,6 +27,20 @@ const SignUp = (props) => {
   const [password, setPassword] = useState("");
   const { authFinish } = useContext(AuthContext);
 
+  const registerUser = async (userUid) => {
+    try {
+      const docRef = await setDoc(doc(db, "users", userUid), {
+        name: name,
+        email: email,
+        phone: phone,
+      });
+      console.log("Document written with ID: ", docRef);
+      authFinish(userUid);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onHandleSignup = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -36,15 +50,7 @@ const SignUp = (props) => {
       );
       const user = userCredential.user;
       const userUid = user.uid;
-
-      const userCollection = collection(db, "users");
-      const docRef = await addDoc(userCollection, {
-        name: name,
-        email: email,
-        phone: phone,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      authFinish(userUid);
+      registerUser(userUid);
     } catch (error) {
       console.log(error);
     }
