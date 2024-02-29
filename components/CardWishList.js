@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useCallback, useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 import { Block, Button as GaButton, Text, theme } from "galio-framework";
 import { Button } from ".";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
+import { getWishlistApiUrl } from "../api/url";
 
 const CardWishList = (props) => {
   const { item, horizontal } = props;
+  const { userToken } = useContext(AuthContext);
+  const url = getWishlistApiUrl(userToken);
   const navigation = useNavigation();
   const renderStoreInfo = (item) => {
     return (
@@ -23,7 +27,25 @@ const CardWishList = (props) => {
       </Block>
     );
   };
+  const removeCard = useCallback(async (prodData) => {
+    console.log("liked");
+    console.log(prodData);
+    try {
+      await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(prodData),
+      });
+    } catch (error) {
+      //Alert user and go back to home screen
+      Alert.alert("Error");
+      console.log(error);
+    }
+  }, []);
   const renderButtons = (item) => {
+    console.log("from cardwishlist ", item);
     return (
       <Block flex style={styles.buttons}>
         <Button
@@ -34,7 +56,7 @@ const CardWishList = (props) => {
           View
         </Button>
 
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
+        <TouchableWithoutFeedback onPress={() => removeCard(item)}>
           <Block flex style={styles.trash}>
             <FontAwesome
               name="trash"
