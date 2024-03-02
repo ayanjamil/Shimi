@@ -11,6 +11,5 @@ export const getExploreApiUrl = () => {
   return `${SEARCH_API_BASEURL}api/feed?spreadsheet_id=1CVQBFl5uDZMIS2VfWhjDW9iS8dQw4hpHC2F7Cuucu6g`;
 };
 export const getWishlistApiUrl = (userToken) => {
-  console.log("from urls part", userToken);
   return `${WISHLIST_API_BASEURL}api/wishlist?id=${userToken}`;
 };

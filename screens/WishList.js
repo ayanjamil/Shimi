@@ -49,7 +49,6 @@ const WishList = (props) => {
   const renderCards = () => {
     return (
       <Block flex style={styles.articles}>
-        {console.log("the final value going is ", result)}
         {result.map((item, index) => (
           <Block key={index}>
             <Block flex>

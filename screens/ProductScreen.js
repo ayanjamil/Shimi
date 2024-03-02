@@ -26,8 +26,9 @@ const ProductScreen = () => {
 
   const productId = route.params?.id;
 
-  const fetchProduct = useCallback((productId) => {
-    const fetchedProduct = usables.find((product) => product.id === productId);
+  const fetchProduct = useCallback(async (productId) => {
+    // const fetchedProduct = usables.find((product) => product.id === productId);
+    // fetch using productId api call or can setup useContext to get the id
     setProduct(fetchedProduct);
   }, []);
 

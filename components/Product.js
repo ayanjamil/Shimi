@@ -3,7 +3,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import AspectImage from "./AspectImage";
-import { getExploreApiUrl } from "../api/url";
 import { useCallback, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getWishlistApiUrl } from "../api/url";
@@ -16,10 +15,7 @@ const Product = (props) => {
     navigation.navigate("ProductScreen", { id });
   };
   const onLike = useCallback(async (prodData) => {
-    console.log("liked");
-    console.log(prodData);
     const url = getWishlistApiUrl(userToken);
-    console.log("from product page", url);
     try {
       await fetch(url, {
         method: "POST",
@@ -29,16 +25,10 @@ const Product = (props) => {
         body: JSON.stringify(prodData),
       });
     } catch (error) {
-      //Alert user and go back to home screen
       Alert.alert("Error");
       console.log(error);
     }
   }, []);
-
-  // const onLike = () => {
-  //   console.log("Liked a product");
-  // };
-
   const onCopy = () => {
     console.log("Copy button pressed");
   };
