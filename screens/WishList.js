@@ -23,12 +23,10 @@ const WishList = (props) => {
 
   const getData = useCallback(async () => {
     const url = getWishlistApiUrl(userToken);
-    console.log("from wishslist", url);
     setLoading(true);
     try {
       const response = await fetch(url);
       const searchResultsData = await response.json();
-      console.log(searchResultsData);
       setResult(searchResultsData.data);
     } catch (error) {
       Alert.alert("No product in your Wishlist:((");
