@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+  Linking,
+} from "react-native";
 import { Block, Button as GaButton, Text, theme } from "galio-framework";
 import { Button } from ".";
 import { FontAwesome } from "@expo/vector-icons";
@@ -27,6 +32,7 @@ const CardWishList = (props) => {
       </Block>
     );
   };
+  console.log(item.link);
   const removeCard = useCallback(async (prodData) => {
     console.log("liked");
     console.log(prodData);
@@ -69,15 +75,28 @@ const CardWishList = (props) => {
       </Block>
     );
   };
+  const openURL = async (url) => {
+    try {
+      const supported = await Linking.canOpenURL(url);
+
+      if (!supported) {
+        console.log("Don't know how to open URI: " + url);
+      } else {
+        await Linking.openURL(url);
+      }
+    } catch (error) {
+      console.error("An error occurred", error);
+    }
+  };
 
   return (
     <Block style={styles.CardWishList}>
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
+      <TouchableWithoutFeedback onPress={() => openURL(item.link)}>
         <Block style={styles.imageContainer}>
           <Image source={{ uri: item.image }} style={styles.imageStyles} />
         </Block>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("Pro")}>
+      <TouchableWithoutFeedback onPress={() => openURL(item.link)}>
         <Block flex style={styles.productName}>
           <Text bold style={styles.CardWishListTitle}>
             {item.title}
