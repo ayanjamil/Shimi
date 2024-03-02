@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   StyleSheet,
@@ -32,10 +32,7 @@ const CardWishList = (props) => {
       </Block>
     );
   };
-  console.log(item.link);
   const removeCard = useCallback(async (prodData) => {
-    console.log("liked");
-    console.log(prodData);
     try {
       await fetch(url, {
         method: "DELETE",
@@ -51,7 +48,6 @@ const CardWishList = (props) => {
     }
   }, []);
   const renderButtons = (item) => {
-    console.log("from cardwishlist ", item);
     return (
       <Block flex style={styles.buttons}>
         <Button
