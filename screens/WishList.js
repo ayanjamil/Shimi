@@ -6,7 +6,13 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import React, { useCallback, useEffect, useState, useContext } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useContext,
+  useReducer,
+} from "react";
 import CardWishList from "../components/CardWishList";
 import usables from "../constants/usables";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,20 +20,24 @@ import { useNavigation } from "@react-navigation/native";
 import { getWishlistApiUrl } from "../api/url";
 import { AuthContext } from "../context/AuthContext";
 
+import { useAppData, useAppDispatch } from "../context/AppContext";
+
 const { width, height } = Dimensions.get("screen");
 
 const WishList = (props) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const { userToken } = useContext(AuthContext);
-
+  const dispatch = useAppDispatch();
   const getData = useCallback(async () => {
     const url = getWishlistApiUrl(userToken);
     setLoading(true);
     try {
       const response = await fetch(url);
       const searchResultsData = await response.json();
+      console.log(searchResultsData);
       setResult(searchResultsData.data);
+      dispatch({ type: "setInitialData", payload: searchResultsData.data });
     } catch (error) {
       Alert.alert("No product in your Wishlist:((");
     } finally {
