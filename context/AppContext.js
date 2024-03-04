@@ -18,10 +18,10 @@ export function AppContextProvider({ children }) {
 function dataReducer(data, action) {
   switch (action.type) {
     case "wishlistAdd": {
-      return [...data, {}];
+      return [...data, action.payload];
     }
     case "wishlistDelete": {
-      // return tasks.filter((t) => t.id !== action.id);
+      return data.filter((t) => t.id !== action.id);
     }
     case "setInitialData": {
       return action.payload;
@@ -31,7 +31,7 @@ function dataReducer(data, action) {
     }
   }
 }
-const initialData = []; // api call
+const initialData = [];
 
 export function useAppData() {
   return useContext(AppContext);

@@ -13,11 +13,14 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import { getWishlistApiUrl } from "../api/url";
 
+import { useAppData, useAppDispatch } from "../context/AppContext";
+
 const CardWishList = (props) => {
   const { item, horizontal } = props;
   const { userToken } = useContext(AuthContext);
   const url = getWishlistApiUrl(userToken);
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const renderStoreInfo = (item) => {
     return (
       <Block flex style={styles.store}>
@@ -41,6 +44,7 @@ const CardWishList = (props) => {
         },
         body: JSON.stringify(prodData),
       });
+      dispatch({ type: "wishlistDelete", id: prodData.id });
     } catch (error) {
       //Alert user and go back to home screen
       Alert.alert("Error");

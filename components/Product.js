@@ -6,11 +6,13 @@ import AspectImage from "./AspectImage";
 import { useCallback, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getWishlistApiUrl } from "../api/url";
+import { useAppDispatch } from "../context/AppContext";
 
 const Product = (props) => {
   const { id, image, title } = props.product;
   const navigation = useNavigation();
   const { userToken } = useContext(AuthContext);
+  const dispatch = useAppDispatch();
   const goToProductPage = () => {
     navigation.navigate("ProductScreen", { id });
   };
@@ -24,6 +26,7 @@ const Product = (props) => {
         },
         body: JSON.stringify(prodData),
       });
+      dispatch({ type: "wishlistAdd", payload: newData });
     } catch (error) {
       Alert.alert("Error");
       console.log(error);
