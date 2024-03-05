@@ -1,29 +1,24 @@
 import React, { createContext, useContext, useState, useReducer } from "react";
 
+const initialData = [];
 export const AppContext = createContext(null);
-export const AppDispatchContext = createContext(null);
-
-export function AppContextProvider({ children }) {
-  const [data, dispatch] = useReducer(dataReducer, initialData);
-  //the resultant state is stored in data
-
-  return (
-    <AppContext.Provider value={data}>
-      <AppDispatchContext.Provider value={dispatch}>
-        {children}
-      </AppDispatchContext.Provider>
-    </AppContext.Provider>
-  );
-}
 function dataReducer(data, action) {
   switch (action.type) {
     case "wishlistAdd": {
-      return [...data, action.payload];
+      const { id } = action.payload;
+      console.log("activity payload value", action.payload);
+
+      return [...data, { id }];
+      // return [...data, action.payload];
     }
     case "wishlistDelete": {
-      return data.filter((t) => t.id !== action.id);
+      const { id } = action;
+      console.log(data.filter((t) => t.id !== id));
+      return data.filter((t) => t.id !== id);
+      //destructure data and use console.log
     }
     case "setInitialData": {
+      console.log("data inot  setInitialData part", action.payload);
       return action.payload;
     }
     default: {
@@ -31,12 +26,15 @@ function dataReducer(data, action) {
     }
   }
 }
-const initialData = [];
-
-export function useAppData() {
-  return useContext(AppContext);
+export function AppContextProvider({ children }) {
+  const [data, dispatch] = useReducer(dataReducer, initialData);
+  return (
+    <AppContext.Provider value={{ data, dispatch }}>
+      {children}
+    </AppContext.Provider>
+  );
 }
 
-export function useAppDispatch() {
-  return useContext(AppDispatchContext);
+export function useAppContext() {
+  return useContext(AppContext);
 }

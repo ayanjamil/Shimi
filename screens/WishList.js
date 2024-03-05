@@ -14,21 +14,19 @@ import React, {
   useReducer,
 } from "react";
 import CardWishList from "../components/CardWishList";
-import usables from "../constants/usables";
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { getWishlistApiUrl } from "../api/url";
 import { AuthContext } from "../context/AuthContext";
 
-import { useAppData, useAppDispatch } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 const { width, height } = Dimensions.get("screen");
 
 const WishList = (props) => {
-  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const { userToken } = useContext(AuthContext);
-  const dispatch = useAppDispatch();
+  const { data, dispatch } = useAppContext();
+  console.log("from WIshlist", data);
   const getData = useCallback(async () => {
     const url = getWishlistApiUrl(userToken);
     setLoading(true);
@@ -36,7 +34,6 @@ const WishList = (props) => {
       const response = await fetch(url);
       const searchResultsData = await response.json();
       console.log(searchResultsData);
-      setResult(searchResultsData.data);
       dispatch({ type: "setInitialData", payload: searchResultsData.data });
     } catch (error) {
       Alert.alert("No product in your Wishlist:((");
@@ -57,7 +54,7 @@ const WishList = (props) => {
   const renderCards = () => {
     return (
       <Block flex style={styles.articles}>
-        {result.map((item, index) => (
+        {data.map((item, index) => (
           <Block key={index}>
             <Block flex>
               <CardWishList item={item} horizontal />
@@ -71,10 +68,10 @@ const WishList = (props) => {
 
   return (
     <Block>
-      {!loading && result ? (
+      {!loading && data ? (
         <Block>
           <Text bold style={styles.headItems}>
-            {result.length} items
+            {data.length} items
           </Text>
           <Block style={styles.scrollView}>
             <ScrollView showsVerticalScrollIndicator={false}>

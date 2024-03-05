@@ -13,14 +13,15 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import { getWishlistApiUrl } from "../api/url";
 
-import { useAppData, useAppDispatch } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 const CardWishList = (props) => {
   const { item, horizontal } = props;
   const { userToken } = useContext(AuthContext);
   const url = getWishlistApiUrl(userToken);
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
+  const { data, dispatch } = useAppContext();
+  console.log("from cardWishlist block", data);
   const renderStoreInfo = (item) => {
     return (
       <Block flex style={styles.store}>

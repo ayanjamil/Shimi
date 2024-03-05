@@ -6,18 +6,19 @@ import AspectImage from "./AspectImage";
 import { useCallback, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getWishlistApiUrl } from "../api/url";
-import { useAppDispatch } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 const Product = (props) => {
   const { id, image, title } = props.product;
   const navigation = useNavigation();
   const { userToken } = useContext(AuthContext);
-  const dispatch = useAppDispatch();
+  const { data, dispatch } = useAppContext();
   const goToProductPage = () => {
     navigation.navigate("ProductScreen", { id });
   };
   const onLike = useCallback(async (prodData) => {
     const url = getWishlistApiUrl(userToken);
+    console.log("liked");
     try {
       await fetch(url, {
         method: "POST",
@@ -26,7 +27,7 @@ const Product = (props) => {
         },
         body: JSON.stringify(prodData),
       });
-      dispatch({ type: "wishlistAdd", payload: newData });
+      dispatch({ type: "wishlistAdd", payload: prodData });
     } catch (error) {
       Alert.alert("Error");
       console.log(error);
