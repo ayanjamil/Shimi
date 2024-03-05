@@ -19,7 +19,6 @@ const WishList = (props) => {
   const [loading, setLoading] = useState(true);
   const { userToken } = useContext(AuthContext);
   const { data, dispatch } = useAppContext();
-  console.log("from WIshlist", data);
   const getData = useCallback(async () => {
     const url = getWishlistApiUrl(userToken);
     setLoading(true);
