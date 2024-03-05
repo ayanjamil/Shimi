@@ -16,7 +16,7 @@ const Product = (props) => {
   const goToProductPage = () => {
     navigation.navigate("ProductScreen", { id });
   };
-  const onLike = useCallback(async (prodData) => {
+  const onLike = useCallback(async (productData) => {
     const url = getWishlistApiUrl(userToken);
     try {
       await fetch(url, {
@@ -24,11 +24,11 @@ const Product = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(prodData),
+        body: JSON.stringify(productData),
       });
-      dispatch({ type: "wishlistAdd", payload: prodData });
+      dispatch({ type: "wishlistAdd", payload: productData });
     } catch (error) {
-      Alert.alert("Error");
+      Alert.alert("Error finding the Wishlisted products :((");
       console.log(error);
     }
   }, []);

@@ -46,18 +46,14 @@ const CardWishList = (props) => {
       });
       dispatch({ type: "wishlistDelete", id: prodData.id });
     } catch (error) {
-      Alert.alert("Error");
+      Alert.alert("Error removing wishlist item :((");
       console.log(error);
     }
   }, []);
   const renderButtons = (item) => {
     return (
       <Block flex style={styles.buttons}>
-        <Button
-          flex
-          style={styles.viewBtn}
-          onPress={() => navigation.navigate("Pro")}
-        >
+        <Button flex style={styles.viewBtn} onPress={() => openURL(item.link)}>
           View
         </Button>
 
@@ -90,12 +86,12 @@ const CardWishList = (props) => {
 
   return (
     <Block style={styles.CardWishList}>
-      <TouchableWithoutFeedback onPress={() => openURL(item.link)}>
+      <TouchableWithoutFeedback>
         <Block style={styles.imageContainer}>
           <Image source={{ uri: item.image }} style={styles.imageStyles} />
         </Block>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => openURL(item.link)}>
+      <TouchableWithoutFeedback>
         <Block flex style={styles.productName}>
           <Text bold style={styles.CardWishListTitle}>
             {item.title}
