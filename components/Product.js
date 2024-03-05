@@ -18,7 +18,6 @@ const Product = (props) => {
   };
   const onLike = useCallback(async (prodData) => {
     const url = getWishlistApiUrl(userToken);
-    console.log("liked");
     try {
       await fetch(url, {
         method: "POST",

@@ -3,16 +3,9 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
-  Pressable,
   ActivityIndicator,
 } from "react-native";
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useContext,
-  useReducer,
-} from "react";
+import React, { useCallback, useEffect, useState, useContext } from "react";
 import CardWishList from "../components/CardWishList";
 import { useNavigation } from "@react-navigation/native";
 import { getWishlistApiUrl } from "../api/url";
@@ -20,7 +13,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import { useAppContext } from "../context/AppContext";
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 
 const WishList = (props) => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +26,6 @@ const WishList = (props) => {
     try {
       const response = await fetch(url);
       const searchResultsData = await response.json();
-      console.log(searchResultsData);
       dispatch({ type: "setInitialData", payload: searchResultsData.data });
     } catch (error) {
       Alert.alert("No product in your Wishlist:((");

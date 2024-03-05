@@ -20,8 +20,7 @@ const CardWishList = (props) => {
   const { userToken } = useContext(AuthContext);
   const url = getWishlistApiUrl(userToken);
   const navigation = useNavigation();
-  const { data, dispatch } = useAppContext();
-  console.log("from cardWishlist block", data);
+  const { dispatch } = useAppContext();
   const renderStoreInfo = (item) => {
     return (
       <Block flex style={styles.store}>
@@ -47,7 +46,6 @@ const CardWishList = (props) => {
       });
       dispatch({ type: "wishlistDelete", id: prodData.id });
     } catch (error) {
-      //Alert user and go back to home screen
       Alert.alert("Error");
       console.log(error);
     }

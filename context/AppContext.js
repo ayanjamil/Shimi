@@ -5,20 +5,20 @@ export const AppContext = createContext(null);
 function dataReducer(data, action) {
   switch (action.type) {
     case "wishlistAdd": {
-      const { id } = action.payload;
-      console.log("activity payload value", action.payload);
-
-      return [...data, { id }];
-      // return [...data, action.payload];
+      const { id, image, imageURL, link, title } = action.payload;
+      const isAlreadyInWishlist = data.some((item) => item.id === id);
+      if (isAlreadyInWishlist) {
+        console.log("Item is already in the wishlist");
+        return data;
+      } else {
+        return [...data, { id, image, imageURL, link, title }];
+      }
     }
     case "wishlistDelete": {
       const { id } = action;
-      console.log(data.filter((t) => t.id !== id));
       return data.filter((t) => t.id !== id);
-      //destructure data and use console.log
     }
     case "setInitialData": {
-      console.log("data inot  setInitialData part", action.payload);
       return action.payload;
     }
     default: {
