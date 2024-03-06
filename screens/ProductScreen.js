@@ -26,8 +26,6 @@ const ProductScreen = () => {
   const route = useRoute();
 
   const productId = route.params?.id;
-  console.log("productScreen", productId);
-
   const fetchProduct = useCallback(async (productId) => {
     const fetchedProduct = homePageData.find(
       (product) => product.id === productId

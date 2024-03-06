@@ -27,6 +27,7 @@ const Product = (props) => {
         body: JSON.stringify(productData),
       });
       dispatch({ type: "dataAdd", payload: productData });
+      alert("Product has been added to wishlist!");
     } catch (error) {
       Alert.alert("Error finding the Wishlisted products :((");
       console.log(error);

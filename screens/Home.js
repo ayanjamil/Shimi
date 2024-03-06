@@ -20,7 +20,6 @@ import { useAppContext } from "../context/AppContext";
 const { width } = Dimensions.get("screen");
 
 const Home = () => {
-  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const { homePageData, homePageDispatch } = useAppContext();
 
@@ -30,7 +29,6 @@ const Home = () => {
     try {
       const response = await fetch(url);
       const searchResultsData = await response.json();
-      // setResult(searchResultsData.data);
       homePageDispatch({
         type: "setHomePageData",
         payload: searchResultsData.data,

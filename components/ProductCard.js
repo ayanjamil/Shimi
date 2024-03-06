@@ -9,6 +9,7 @@ const ProductCard = (props) => {
   const { dispatch } = useAppContext();
   const onLike = useCallback(async (productData) => {
     dispatch({ type: "dataAdd", payload: productData });
+    alert("Product has been added to wishlist!");
   }, []);
   return (
     <View>

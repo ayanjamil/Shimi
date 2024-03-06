@@ -7,6 +7,7 @@ const SearchProduct = ({ imageURI }) => {
   const [uri, setUri] = useState(imageURI);
   const onLike = () => {
     console.log("Liked a product");
+    alert("Product has been added to wishlist!");
     // tag //
   };
   useEffect(() => {
