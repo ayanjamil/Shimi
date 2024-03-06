@@ -1,19 +1,25 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Ionicons, Entypo } from "@expo/vector-icons";
 import AspectImage from "./AspectImage";
+import { useAppContext } from "../context/AppContext";
+import { useCallback, useContext } from "react";
 
 const ProductCard = (props) => {
   const { id, image, title } = props.product;
-
-  const onLike = () => {
-    console.log("Liked a pin");
-  };
-
+  const { dispatch } = useAppContext();
+  const onLike = useCallback(async (productData) => {
+    dispatch({ type: "dataAdd", payload: productData });
+  }, []);
   return (
     <View>
       <AspectImage image={image} />
 
-      <Pressable onPress={onLike} style={styles.heartBtn}>
+      <Pressable
+        onPress={() => {
+          onLike(props.product);
+        }}
+        style={styles.heartBtn}
+      >
         <Ionicons name="heart-outline" size={24} color="white" />
       </Pressable>
 

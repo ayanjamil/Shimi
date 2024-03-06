@@ -25,7 +25,10 @@ const WishList = (props) => {
     try {
       const response = await fetch(url);
       const searchResultsData = await response.json();
-      dispatch({ type: "setInitialData", payload: searchResultsData.data });
+      dispatch({
+        type: "setInitialData",
+        payload: searchResultsData.data,
+      });
     } catch (error) {
       Alert.alert("No product in your Wishlist:((");
     } finally {

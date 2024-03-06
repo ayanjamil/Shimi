@@ -10,9 +10,10 @@ import { useAppContext } from "../context/AppContext";
 
 const Product = (props) => {
   const { id, image, title } = props.product;
+  console.log(id);
   const navigation = useNavigation();
   const { userToken } = useContext(AuthContext);
-  const { data, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
   const goToProductPage = () => {
     navigation.navigate("ProductScreen", { id });
   };
@@ -26,7 +27,7 @@ const Product = (props) => {
         },
         body: JSON.stringify(productData),
       });
-      dispatch({ type: "wishlistAdd", payload: productData });
+      dispatch({ type: "dataAdd", payload: productData });
     } catch (error) {
       Alert.alert("Error finding the Wishlisted products :((");
       console.log(error);

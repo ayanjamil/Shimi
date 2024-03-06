@@ -15,12 +15,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import ImageUploadComponent from "../components/ImageUploadBtn";
 import Product from "../components/Product";
 import { getExploreApiUrl } from "../api/url";
+import { useAppContext } from "../context/AppContext";
 
 const { width } = Dimensions.get("screen");
 
 const Home = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { homePageData, homePageDispatch } = useAppContext();
 
   const getData = useCallback(async () => {
     const url = getExploreApiUrl();
@@ -28,7 +30,11 @@ const Home = () => {
     try {
       const response = await fetch(url);
       const searchResultsData = await response.json();
-      setResult(searchResultsData.data);
+      // setResult(searchResultsData.data);
+      homePageDispatch({
+        type: "setHomePageData",
+        payload: searchResultsData.data,
+      });
     } catch (error) {
       Alert.alert("Sorry we couldn't find anything for you at the moment :((");
     } finally {
@@ -39,7 +45,9 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
+  console.log(homePageData);
 
+  console.log(result);
   return (
     <Block flex style={styles.homeContainer}>
       <ScrollView style={{ width, marginTop: "20%" }}>
@@ -68,10 +76,10 @@ const Home = () => {
             <ImageUploadComponent />
           </Block>
         </Block>
-        {!loading && result ? (
+        {!loading && homePageData ? (
           <Block flex>
             <MasonryList
-              items={result}
+              items={homePageData}
               ItemComponent={Product}
               numColumns={2}
             />

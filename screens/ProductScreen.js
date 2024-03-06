@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useContext } from "react";
 import {
   ScrollView,
   View,
@@ -17,17 +17,21 @@ import usables from "../constants/usables";
 import ProductCard from "../components/ProductCard";
 import ProductRecomCard from "../components/ProductRecomCard";
 import MasonryList from "../components/MasonryList";
+import { useAppContext } from "../context/AppContext";
 
 const ProductScreen = () => {
   const [product, setProduct] = useState(null);
-
+  const { homePageData, homePageDispatch } = useAppContext();
   const navigation = useNavigation();
   const route = useRoute();
 
   const productId = route.params?.id;
+  console.log("productScreen", productId);
 
   const fetchProduct = useCallback(async (productId) => {
-    // const fetchedProduct = usables.find((product) => product.id === productId);
+    const fetchedProduct = homePageData.find(
+      (product) => product.id === productId
+    );
     // fetch using productId api call or can setup useContext to get the id
     setProduct(fetchedProduct);
   }, []);
@@ -81,7 +85,7 @@ const ProductScreen = () => {
           {!!product && product.title}
         </Text>
         <MasonryList
-          items={usables}
+          items={homePageData}
           ItemComponent={ProductRecomCard}
           numColumns={3}
         />
