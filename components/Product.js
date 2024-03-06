@@ -10,7 +10,6 @@ import { useAppContext } from "../context/AppContext";
 
 const Product = (props) => {
   const { id, image, title } = props.product;
-  console.log(id);
   const navigation = useNavigation();
   const { userToken } = useContext(AuthContext);
   const { dispatch } = useAppContext();

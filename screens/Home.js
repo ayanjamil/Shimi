@@ -45,9 +45,7 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(homePageData);
 
-  console.log(result);
   return (
     <Block flex style={styles.homeContainer}>
       <ScrollView style={{ width, marginTop: "20%" }}>
